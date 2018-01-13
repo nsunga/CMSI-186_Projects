@@ -1,0 +1,3 @@
+# remove class files for JVM
+*.class
+step_four.txt
