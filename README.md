@@ -1,1 +1,2 @@
-# CMSI_186_Prog_Lab
+# CMSI-186_Projects
+Assignments for CMSI 186
