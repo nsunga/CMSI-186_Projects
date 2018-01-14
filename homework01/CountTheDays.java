@@ -2,12 +2,8 @@ import java.io.IOException;
 
 public class CountTheDays {
   public static void main(String[] args) {
-    try {
       //check if the strings are longs first. else throw the exception
-      System.out.println( isValidDate(Long.parseLong(args[0]), Long.parseLong(args[1]), Long.parseLong(args[2])) );
-    } catch (IOException e) {
-      System.out.println("BAD DATA");
-    }
+      System.out.println( daysBetween(Long.parseLong(args[0]), Long.parseLong(args[1]), Long.parseLong(args[2]), Long.parseLong(args[3]), Long.parseLong(args[4]), Long.parseLong(args[5])) );
   }
 
   public static boolean isLeapYear(long year) {
@@ -26,7 +22,7 @@ public class CountTheDays {
     }
   }
 
-  public static long daysInMonth(long month, long year) throws IOException {
+  public static long daysInMonth(long month, long year) {
     if (month == 1) {
       return 31;
     } else if (month == 2) {
@@ -56,7 +52,8 @@ public class CountTheDays {
     } else if (month == 12) {
       return 31;
     } else {
-      throw new IOException();
+      System.out.println("BAD DATA");
+      return -1;
     }
   }
 
@@ -72,8 +69,57 @@ public class CountTheDays {
     }
   }
 
-  //TODO:
   public static long daysBetween(long month0, long day0, long year0, long month1, long day1, long year1) {
+    long amount_of_days = 0;
+    long date_comparator_value = dateComparator(month0, day0, year0, month1, day1, year1);
+    boolean both_dates_valid = false;
+
+    try {
+      both_dates_valid = isValidDate(month0, day0, year0) && isValidDate(month1, day1, year1);
+    } catch (IOException e) {
+      System.out.println("BAD DATA");
+      return -1;
+    }
+
+    if (both_dates_valid) {
+      if (date_comparator_value == 0) {
+        while (year0 <= year1 || (month0 <= month1 && day0 <= day1)) {
+
+          if (year0 == year1 && month0 == month1) {
+            amount_of_days += day1;
+            month0++;
+            break;
+          } else {
+            amount_of_days += daysInMonth(month0, year0);
+            month0++;
+            if (month0 == 13) {
+              month0 = 1;
+              year0++;
+            }
+          }
+          System.out.println(amount_of_days);
+        }
+
+        amount_of_days -= day0;
+        return amount_of_days;
+      }
+    }
     return 1;
+  }
+
+  public static long dateComparator(long month0, long day0, long year0, long month1, long day1, long year1) {
+    if (year0 < year1) {
+      return 0;
+    }
+
+    if (year0 == year1 && month0 < month1) {
+      return 0;
+    }
+
+    if (year0 == year1 && month0 == month1 && day0 < day1) {
+      return 0;
+    } else {
+      return 1;
+    }
   }
 }
