@@ -102,6 +102,26 @@ public class CountTheDays {
 
         amount_of_days -= day0;
         return amount_of_days;
+      } else {
+        while (year1 <= year0 || (month1 <= month0 && day1 <= day0)) {
+
+          if (year1 == year0 && month1 == month0) {
+            amount_of_days += day0;
+            month1++;
+            break;
+          } else {
+            amount_of_days += daysInMonth(month1, year1);
+            month1++;
+            if (month1 == 13) {
+              month1 = 1;
+              year1++;
+            }
+          }
+          System.out.println(amount_of_days);
+        }
+
+        amount_of_days -= day1;
+        return amount_of_days;
       }
     }
     return 1;
