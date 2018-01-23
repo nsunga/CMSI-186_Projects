@@ -217,7 +217,7 @@ public class CalendarStuff {
   * @param    month2 long   containing month number, starting with "1" for "January"
   * @param    day2   long   containing day number
   * @param    year2  long   containing four-digit year
-  * @return          long   count of total number of days
+  * @return          long   count of total number of days or -1 if either dates not valid
   */
   public static long daysBetween( long month1, long day1, long year1, long month2, long day2, long year2 ) {
     long day_count = 0;
