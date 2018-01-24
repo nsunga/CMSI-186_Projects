@@ -1,4 +1,17 @@
-import java.lang.NumberFormatException;
+/**
+ *  File name     :  CountTheDays.java
+ *  Purpose       :  Contains the main method to run CalendarStuff.daysBetween
+ *                   from command line.
+ *  Author        :  Nick Sunga
+ *  Date          :  2018-01-23
+ *  Description   :  JVM runs code that determines the amount of days between
+ *                   two given dates from a command line interface
+ *  Notes         :  Enter the numbers in order -> month1, day1, year1, month2, day2, year2
+ *  Warnings      :  None
+ *  Exceptions    :  None
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+
 import java.io.IOException;
 
 public class CountTheDays {

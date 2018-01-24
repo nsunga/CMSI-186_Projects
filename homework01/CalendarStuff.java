@@ -3,8 +3,8 @@
  *  Purpose       :  Provides a class with supporting methods for CountTheDays.java program
  *  Author        :  B.J. Johnson (prototype)
  *  Date          :  2017-01-02 (prototype)
- *  Author        :  <your name here>
- *  Date          :  <date of writing here>
+ *  Author        :  Nick Sunga
+ *  Date          :  2018-01-23
  *  Description   :  This file provides the supporting methods for the CountTheDays program which will
  *                   calculate the number of days between two dates.  It shows the use of modularization
  *                   when writing Java code, and how the Java compiler can "figure things out" on its
@@ -114,7 +114,7 @@ public class CalendarStuff {
     return month1 == month2 && day1 == day2 && year1 == year2 ? true : false;
   }
 
-  /** TODO: Fix returns
+  /**
   * A method to compare the ordering of two dates
   * @param    month1 long   containing month number, starting with "1" for "January"
   * @param    day1   long   containing day number
