@@ -33,7 +33,16 @@ public class StringStuff {
    * @return  boolean which is true if there is a vowel, or false otherwise
    */
    public static boolean containsVowel( String s ) {
-      return false;
+     String vowels = new String("AEIOUaeiou");
+     char[] s_array = s.toCharArray();
+
+     for (int i = 0; i < s_array.length; i++) {
+       if (vowels.indexOf(s_array[i]) != -1) {
+         return true;
+       }
+     }
+
+     return false;
    }
 
   /**
@@ -45,7 +54,25 @@ public class StringStuff {
    * @return  boolean which is true if this a palindrome, or false otherwise
    */
    public static boolean isPalindrome( String s ) {
-      return true;
+     char[] s_array = s.toCharArray();
+     boolean s_palindrome_value = false;
+
+     if (s_array.length == 0 || s_array.length == 1) {
+       return s_palindrome_value = true;
+     } else {
+       for (int i = 0; i < s_array.length; i++) {
+         if (i > s_array.length - (i + 1)) {
+           s_palindrome_value = true;
+           break;
+         }
+
+         if (s_array[i] != s_array[s_array.length - (i + 1)]) {
+           return s_palindrome_value = false;
+         }
+       }
+     }
+
+     return s_palindrome_value;
    }
 
   /**
@@ -57,7 +84,22 @@ public class StringStuff {
    * @return  String containing the &quot;even&quot; letters from the input
    */
    public static String evensOnly( String s ) {
-      return new String( "HJHJHJ" );
+     char[] s_array = s.toCharArray();
+     String s_even_characters = new String();
+
+     for (int i = 0; i < s_array.length; i++) {
+       if ((int)s_array[i] > 64 && (int)s_array[i] < 91) {
+         if (((int)s_array[i] - 64) % 2 == 0) {
+           s_even_characters += s_array[i];
+         }
+       } else if ((int)s_array[i] > 96 && (int)s_array[i] < 123) {
+         if (((int)s_array[i] - 96) % 2 == 0) {
+           s_even_characters += s_array[i];
+         }
+       }
+     }
+
+     return s_even_characters;
    }
 
   /**
@@ -69,7 +111,22 @@ public class StringStuff {
    * @return  String containing the &quot;odd&quot; letters from the input
    */
    public static String oddsOnly( String s ) {
-      return new String( "IKIKIK" );
+     char[] s_array = s.toCharArray();
+     String s_odd_characters = new String();
+
+     for (int i = 0; i < s_array.length; i++) {
+       if ((int)s_array[i] > 64 && (int)s_array[i] < 91) {
+         if (((int)s_array[i] - 64) % 2 != 0) {
+           s_odd_characters += s_array[i];
+         }
+       } else if ((int)s_array[i] > 96 && (int)s_array[i] < 123) {
+         if (((int)s_array[i] - 96) % 2 != 0) {
+           s_odd_characters += s_array[i];
+         }
+       }
+     }
+
+     return s_odd_characters;
    }
 
   /**
@@ -101,7 +158,14 @@ public class StringStuff {
    * @return  String containing the reverse of the input string
    */
    public static String reverse( String s ) {
-      return new String( "kculc eht tahw" );
+     char[] s_array = s.toCharArray();
+     String s_array_reversed = new String();
+
+     for (int i = 0; i < s_array.length; i++) {
+       s_array_reversed = s_array[i] + s_array_reversed;
+     }
+
+     return s_array_reversed;
    }
 
   /**
