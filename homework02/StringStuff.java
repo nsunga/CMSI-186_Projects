@@ -137,7 +137,29 @@ public class StringStuff {
    * @return  String containing the &quot;even&quot; letters from the input without duplicates
    */
    public static String evensOnlyNoDupes( String s ) {
-      return new String( "HJ" );
+     char[] s_array = s.toCharArray();
+     String s_even_characters = new String();
+     LinkedHashSet<Character> no_dupes = new LinkedHashSet<Character>();
+
+     for (int i = 0; i < s_array.length; i++) {
+       if ((int)s_array[i] > 64 && (int)s_array[i] < 91) {
+         if (((int)s_array[i] - 64) % 2 == 0) {
+           if (!no_dupes.contains(new Character(s_array[i]))) {
+             no_dupes.add(new Character(s_array[i]));
+             s_even_characters += s_array[i];
+           }
+         }
+       } else if ((int)s_array[i] > 96 && (int)s_array[i] < 123) {
+         if (((int)s_array[i] - 96) % 2 == 0) {
+           if (!no_dupes.contains(new Character(s_array[i]))) {
+             no_dupes.add(new Character(s_array[i]));
+             s_even_characters += s_array[i];
+           }
+         }
+       }
+     }
+
+     return s_even_characters;
    }
 
   /**
@@ -148,8 +170,31 @@ public class StringStuff {
    * @return  String containing the &quot;odd&quot; letters from the input without duplicates
    */
    public static String oddsOnlyNoDupes( String s ) {
-      return new String( "IK" );
-   }
+     char[] s_array = s.toCharArray();
+     String s_odd_characters = new String();
+     LinkedHashSet<Character> no_dupes = new LinkedHashSet<Character>();
+
+     for (int i = 0; i < s_array.length; i++) {
+       if ((int)s_array[i] > 64 && (int)s_array[i] < 91) {
+         if (((int)s_array[i] - 64) % 2 != 0) {
+           if (!no_dupes.contains(new Character(s_array[i]))) {
+             no_dupes.add(new Character(s_array[i]));
+             s_odd_characters += s_array[i];
+           }
+         }
+       } else if ((int)s_array[i] > 96 && (int)s_array[i] < 123) {
+         if (((int)s_array[i] - 96) % 2 != 0) {
+           if (!no_dupes.contains(new Character(s_array[i]))) {
+             no_dupes.add(new Character(s_array[i]));
+             s_odd_characters += s_array[i];
+           }
+         }
+       }
+     }
+
+     //System.out.println(s_odd_characters);
+     return s_odd_characters;
+  }
 
   /**
    * Method to return the reverse of a string passed as an argument
