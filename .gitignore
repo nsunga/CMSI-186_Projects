@@ -1,3 +1,7 @@
 # remove class files for JVM
 *.class
 step_four.txt
+*.html
+package-list
+*.js
+*.css

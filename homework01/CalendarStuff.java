@@ -1,6 +1,7 @@
 /**
  *  File name     :  CalendarStuff.java
- *  Purpose       :  Provides a class with supporting methods for CountTheDays.java program
+ *  Purpose       :  Provides a class with supporting methods for CountTheDays.java program. Unit tested
+ *                   under CalendarStuffTester.java
  *  Author        :  B.J. Johnson (prototype)
  *  Date          :  2017-01-02 (prototype)
  *  Author        :  Nick Sunga
