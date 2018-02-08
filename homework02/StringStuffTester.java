@@ -312,7 +312,7 @@ public class StringStuffTester {
       catch( Exception e ) { System.out.println ( false ); }
 
       System.out.print( "   Testing 'California' should return aio: " );
-      try { System.out.println( (0 == StringStuff.oddsOnlyNoDupes( "California" ).compareTo("aio")) ? "got it" : "don't got it" ); }
+      try { System.out.println( (0 == StringStuff.oddsOnlyNoDupes( "California" ).compareTo("Caio")) ? "got it" : "don't got it" ); }
       catch( Exception e ) { System.out.println ( false ); }
 
       System.out.print( "   Testing 'BDFHJLNPRTVXBDFHJLNPRTVX' should return the empty string: " );
