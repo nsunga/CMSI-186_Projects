@@ -51,11 +51,9 @@ public class Die {
   * Note: parameter must be checked for validity; invalid value must throw "IllegalArgumentException"
   */
   public Die( int nSides ) {
-    try { if (nSides < MINIMUM_SIDES) { throw new IllegalArgumentException(); } else { this.sides = nSides; } }
-    catch(IllegalArgumentException e) { System.exit("int sides too small"); }
-
-    // in real life, some side needs to be facing up
-    this.pips = Math.random() * this.sides + 1;
+    try { if(nSides < MINIMUM_SIDES) { throw new IllegalArgumentException(); } else { this.sides = nSides; } }
+    catch(IllegalArgumentException e) { System.out.println("TOO SMALL");
+                                        System.exit(0); }
   }
 
   /**
@@ -63,7 +61,7 @@ public class Die {
   * @return  integer value of the result of the roll, randomly selected
   */
   public int roll() {
-    this.pips = (int)Math.random() * this.sides + 1;
+    this.pips = (int)(Math.random() * this.sides) + 1;
     return this.pips;
   }
 
@@ -84,10 +82,8 @@ public class Die {
   * @throws      IllegalArgumentException
   */
   public void setSides( int sides ) {
-    try { if (sides < MINIMUM_SIDES) { throw new IllegalArgumentException(); } else { this.sides = nSides; } }
-    catch(IllegalArgumentException e) { System.exit("int sides too small"); }
-
-    this.pips = (int)Math.random() * this.sides + 1;
+    try { if(sides < MINIMUM_SIDES) { throw new IllegalArgumentException(); } else { this.sides = sides; } }
+    catch(IllegalArgumentException e) { System.out.println("TOO SMALL"); System.exit(0); }
   }
 
   /**
@@ -95,7 +91,7 @@ public class Die {
   * @return String representation of this Die
   */
   public String toString() {
-    return "[Sides: " + this.sides + "]";
+    return Integer.toString(this.sides);
   }
 
   /**
@@ -103,14 +99,18 @@ public class Die {
   * @return String representation of this Die
   */
   public static String toString( Die d ) {
-    return "pips: " + d.getValue();
+    return d.toString();
   }
 
   /**
   * A little test main to check things out
   */
   public static void main( String[] args ) {
-    System.out.println( "Hello world from the Die class..." );
+    Die practice_die = new Die(5);
+    System.out.println(Die.toString(practice_die));
+    System.out.println(practice_die);
+    System.out.println(practice_die.roll());
+    System.out.println("PIPS VALUE: " + practice_die.getValue());
   }
 
 }
