@@ -91,7 +91,7 @@ public class Die {
   * @return String representation of this Die
   */
   public String toString() {
-    return Integer.toString(this.sides);
+    return Integer.toString(this.pips);
   }
 
   /**

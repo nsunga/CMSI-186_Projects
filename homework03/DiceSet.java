@@ -27,87 +27,115 @@
  *           -----  ----------  ------------  -----------------------------------------------------------
  *  @version 1.0.0  2017-02-09  B.J. Johnson  Initial writing and release
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-public class DiceSetEmpty {
+public class DiceSet {
+
+/**
+* private instance data
+*/
+private int count;
+private int sides;
+private Die[] ds = null;
+
+  // public constructor:
+  /**
+  * constructor
+  * @param  count int value containing total dice count
+  * @param  sides int value containing the number of pips on each die
+  * @throws IllegalArgumentException if one or both arguments don't make sense
+  * @note   parameters are checked for validity; invalid values throw "IllegalArgumentException"
+  */
+  public DiceSet( int count, int sides ) {
+    try { if (count <= 0 || sides <= 0) { throw new IllegalArgumentException(); } }
+    catch(IllegalArgumentException e) { System.out.println("WRONG"); System.exit(0); }
+
+    ds = new Die[ count ];
+    this.count = count;
+    this.sides = sides;
+    for (int i = 0; i < ds.length; i++) {
+      ds[i] = new Die(sides);
+    }
+  }
 
   /**
-   * private instance data
-   */
-   private int count;
-   private int sides;
-   private Die[] ds = null;
+  * @return the sum of all the dice values in the set
+  */
+  public int sum() {
+    int sigma = 0;
 
-   // public constructor:
-  /**
-   * constructor
-   * @param  count int value containing total dice count
-   * @param  sides int value containing the number of pips on each die
-   * @throws IllegalArgumentException if one or both arguments don't make sense
-   * @note   parameters are checked for validity; invalid values throw "IllegalArgumentException"
-   */
-   public DiceSetEmpty( int count, int sides ) {
-      ds = new Die[ count ];
-   }
+    for (Die every_die : this.ds) {
+      sigma += every_die.getValue();
+    }
+
+    return sigma;
+  }
 
   /**
-   * @return the sum of all the dice values in the set
-   */
-   public int sum() {
-      return 0;
-   }
+  * Randomly rolls all of the dice in this set
+  *  NOTE: you will need to use one of the "toString()" methods to obtain
+  *  the values of the dice in the set
+  */
+  public void roll() {
+    for (Die every_die : this.ds) {
+      every_die.roll();
+    }
+  }
 
   /**
-   * Randomly rolls all of the dice in this set
-   *  NOTE: you will need to use one of the "toString()" methods to obtain
-   *  the values of the dice in the set
-   */
-   public void roll() {
-   }
+  * Randomly rolls a single die of the dice in this set indexed by 'dieIndex'
+  * @param  dieIndex int of which die to roll
+  * @return the integer value of the newly rolled die
+  * @trhows IllegalArgumentException if the index is out of range
+  */
+  public int rollIndividual( int dieIndex ) {
+    try { if (dieIndex < this.ds.length || dieIndex > this.ds.length) { throw new IllegalArgumentException(); } }
+    catch(IllegalArgumentException e) { System.out.println("INDEX TOO SMALL OR TOO BIG"); System.exit(0); }
+
+    return this.ds[dieIndex].roll();
+  }
 
   /**
-   * Randomly rolls a single die of the dice in this set indexed by 'dieIndex'
-   * @param  dieIndex int of which die to roll
-   * @return the integer value of the newly rolled die
-   * @trhows IllegalArgumentException if the index is out of range
-   */
-   public int rollIndividual( int dieIndex ) {
-      return 0;
-   }
+  * Gets the value of the die in this set indexed by 'dieIndex'
+  * @param  dieIndex int of which die to roll
+  * @trhows IllegalArgumentException if the index is out of range
+  */
+  public int getIndividual( int dieIndex ) {
+    try { if (dieIndex < this.ds.length || dieIndex > this.ds.length) { throw new IllegalArgumentException(); } }
+    catch(IllegalArgumentException e) { System.out.println("INDEX TOO SMALL OR TOO BIG"); System.exit(0); }
+
+    return this.ds[dieIndex].getValue();
+  }
 
   /**
-   * Gets the value of the die in this set indexed by 'dieIndex'
-   * @param  dieIndex int of which die to roll
-   * @trhows IllegalArgumentException if the index is out of range
-   */
-   public int getIndividual( int dieIndex ) {
-      return -999;
-   }
+  * @return Public Instance method that returns a String representation of the DiceSet instance
+  */
+  public String toString() {
+    String result = "";
+
+    for (Die every_die : this.ds) {
+      result.concat(every_die.toString() + ", ");
+    }
+
+    return result;
+  }
 
   /**
-   * @return Public Instance method that returns a String representation of the DiceSet instance
-   */
-   public String toString() {
-      String result = "";
-      return result;
-   }
+  * @return Class-wide version of the preceding instance method
+  */
+  public static String toString( DiceSet ds ) {
+    return ds.toString();
+  }
 
   /**
-   * @return Class-wide version of the preceding instance method
-   */
-   public static String toString( DiceSet ds ) {
-      return "";
-   }
-
+  * @return  tru iff this set is identical to the set passed as an argument
+  */
+  public boolean isIdentical( DiceSet ds ) {
+    return true;
+  }
   /**
-   * @return  tru iff this set is identical to the set passed as an argument
-   */
-   public boolean isIdentical( DiceSet ds ) {
-      return true;
-   }
-  /**
-   * A little test main to check things out
-   */
-   public static void main( String[] args ) {
-      // You do this part!
-   }
+  * A little test main to check things out
+  */
+  public static void main( String[] args ) {
+    DiceSet test_set = new DiceSet(5, 4);
+  }
 
 }
