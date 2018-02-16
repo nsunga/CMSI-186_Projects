@@ -45,8 +45,7 @@ private Die[] ds = null;
   * @note   parameters are checked for validity; invalid values throw "IllegalArgumentException"
   */
   public DiceSet( int count, int sides ) {
-    try { if (count <= 0 || sides <= 0) { throw new IllegalArgumentException(); } }
-    catch(IllegalArgumentException e) { System.out.println("WRONG"); System.exit(0); }
+    if (count <= 0 || sides<= 0) { throw new IllegalArgumentException(); }
 
     ds = new Die[ count ];
     this.count = count;
@@ -84,11 +83,10 @@ private Die[] ds = null;
   * Randomly rolls a single die of the dice in this set indexed by 'dieIndex'
   * @param  dieIndex int of which die to roll
   * @return the integer value of the newly rolled die
-  * @trhows IllegalArgumentException if the index is out of range
+  * @throws IllegalArgumentException if the index is out of range
   */
   public int rollIndividual( int dieIndex ) {
-    try { if (dieIndex < this.ds.length || dieIndex > this.ds.length) { throw new IllegalArgumentException(); } }
-    catch(IllegalArgumentException e) { System.out.println("INDEX TOO SMALL OR TOO BIG"); System.exit(0); }
+    if (dieIndex < this.ds.length || dieIndex > this.ds.length) { throw new IllegalArgumentException(); }
 
     return this.ds[dieIndex].roll();
   }
@@ -96,11 +94,10 @@ private Die[] ds = null;
   /**
   * Gets the value of the die in this set indexed by 'dieIndex'
   * @param  dieIndex int of which die to roll
-  * @trhows IllegalArgumentException if the index is out of range
+  * @throws IllegalArgumentException if the index is out of range
   */
   public int getIndividual( int dieIndex ) {
-    try { if (dieIndex < this.ds.length || dieIndex > this.ds.length) { throw new IllegalArgumentException(); } }
-    catch(IllegalArgumentException e) { System.out.println("INDEX TOO SMALL OR TOO BIG"); System.exit(0); }
+    if (dieIndex < this.ds.length || dieIndex > this.ds.length) { throw new IllegalArgumentException(); }
 
     return this.ds[dieIndex].getValue();
   }
@@ -112,7 +109,8 @@ private Die[] ds = null;
     String result = "";
 
     for (Die every_die : this.ds) {
-      result.concat(every_die.toString() + ", ");
+      System.out.println(every_die);
+      result += every_die;
     }
 
     return result;
@@ -129,13 +127,24 @@ private Die[] ds = null;
   * @return  tru iff this set is identical to the set passed as an argument
   */
   public boolean isIdentical( DiceSet ds ) {
-    return true;
+    /*
+    * CASES: 1) same number of dice in both sets
+    *  2) same as 1) with same number of sides
+    *  3) same as 2) plus same total value for all dice in the sets
+    *  4) same as 2) plus same values on pairs of dice, NOT in order
+    *  5) same as 2) plus same values on pairs of dice, IN order
+    */
+    if (this.count == ds.count) { return true; }
+    else if (this.count == ds.count && this.sides == ds.sides) { return true; }
+    else { return false; }
   }
   /**
   * A little test main to check things out
   */
   public static void main( String[] args ) {
     DiceSet test_set = new DiceSet(5, 4);
+    DiceSet another_set = new DiceSet(5, 4);
+    System.out.println(test_set.isIdentical(another_set) ? "we good" : "we not good");
   }
 
 }
