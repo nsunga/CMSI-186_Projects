@@ -45,7 +45,7 @@ private Die[] ds = null;
   * @note   parameters are checked for validity; invalid values throw "IllegalArgumentException"
   */
   public DiceSet( int count, int sides ) {
-    if (count <= 0 || sides<= 0) { throw new IllegalArgumentException(); }
+    if (count < 1 || sides < 4) { throw new IllegalArgumentException(); }
 
     ds = new Die[ count ];
     this.count = count;
@@ -108,10 +108,7 @@ private Die[] ds = null;
   public String toString() {
     String result = "";
 
-    for (Die every_die : this.ds) {
-      System.out.println(every_die);
-      result += every_die;
-    }
+    for (Die every_die : this.ds) { result += every_die; }
 
     return result;
   }
@@ -142,9 +139,40 @@ private Die[] ds = null;
   * A little test main to check things out
   */
   public static void main( String[] args ) {
-    DiceSet test_set = new DiceSet(5, 4);
-    DiceSet another_set = new DiceSet(5, 4);
-    System.out.println(test_set.isIdentical(another_set) ? "we good" : "we not good");
+    System.out.println("\nTESTS for invalid DiceSet(some_int, other_int) input:");
+    try {
+      System.out.print("DiceSet(0, 4) should throw excep.: ");
+      new DiceSet(0, 4);
+    } catch(Exception e) { System.out.println(e + " caught"); }
+    try {
+      System.out.print("DiceSet(3, 2) should throw excep.: ");
+      new DiceSet(3, 2);
+    } catch(Exception e) { System.out.println(e + " caught"); }
+    try {
+      System.out.print("DiceSet(-10, -10) should throw excep.: ");
+      new DiceSet(-10, -10);
+    } catch(Exception e) { System.out.println(e + " caught"); }
+    try {
+      System.out.print("DiceSet(0, 0) should throw excep.: ");
+      new DiceSet(0, 0);
+    } catch(Exception e) { System.out.println(e + " caught"); }
+
+    System.out.println("\nTESTS for roll() outputs:");
+    try {
+      DiceSet temp_set = new DiceSet(5, 10);
+      temp_set.roll();
+      System.out.println("Values for DiceSet(5, 10) should be between 1-10: " + temp_set);
+    } catch(Exception e) { System.out.println(e + " caught"); }
+    try {
+      DiceSet temp_set = new DiceSet(5, 6);
+      temp_set.roll();
+      System.out.println("Values for DiceSet(5, 6) should be between 1-6: " + temp_set);
+    } catch(Exception e) { System.out.println(e + " caught"); }
+    try {
+      DiceSet temp_set = new DiceSet(3, 4);
+      temp_set.roll();
+      System.out.println("Values for DiceSet(3, 4) should be between 1-4: " + temp_set);
+    } catch(Exception e) { System.out.println(e + " caught"); }
   }
 
 }
