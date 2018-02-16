@@ -27,6 +27,8 @@
  *           -----  ----------  ------------  -----------------------------------------------------------
  *  @version 1.0.0  2017-02-09  B.J. Johnson  Initial writing and release
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+import java.util.Dictionary;
+
 public class DiceSet {
 
 /**
@@ -131,9 +133,11 @@ private Die[] ds = null;
     *  4) same as 2) plus same values on pairs of dice, NOT in order
     *  5) same as 2) plus same values on pairs of dice, IN order
     */
-    if (this.count == ds.count) { return true; }
-    else if (this.count == ds.count && this.sides == ds.sides) { return true; }
-    else { return false; }
+    if (this.count == ds.count && this.sides == ds.sides && this.sum() == ds.sum()) {
+      return true; }
+    else {
+      return false;
+    }
   }
   /**
   * A little test main to check things out
