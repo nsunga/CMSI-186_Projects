@@ -27,7 +27,8 @@
  *           -----  ----------  ------------  -----------------------------------------------------------
  *  @version 1.0.0  2017-02-09  B.J. Johnson  Initial writing and release
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-import java.util.Dictionary;
+import java.util.Map;
+import java.util.HashMap;
 
 public class DiceSet {
 
@@ -133,9 +134,39 @@ private Die[] ds = null;
     *  4) same as 2) plus same values on pairs of dice, NOT in order
     *  5) same as 2) plus same values on pairs of dice, IN order
     */
+    Map<String, Integer> this_rolls_and_occurrences = new HashMap<String, Integer>();
+    Map<String, Integer> other_ds_rolls_and_occurrences = new HashMap<String, Integer>();
+
+    for (int i = 0; i < this.ds.length; i++) {
+      if (this_rolls_and_occurrences.containsKey(this.ds[i].toString())) {
+        Integer value = this_rolls_and_occurrences.get(this.ds[i].toString());
+        this_rolls_and_occurrences.replace(this.ds[i].toString(), value + 1);
+      } else {
+        this_rolls_and_occurrences.put(this.ds[i].toString(), new Integer(this.ds[i].getValue()));
+      }
+    }
+
+    for (int i = 0; i < ds.ds.length; i++) {
+      if (other_ds_rolls_and_occurrences.containsKey(ds.ds[i].toString())) {
+        Integer value = other_ds_rolls_and_occurrences.get(ds.ds[i].toString());
+        other_ds_rolls_and_occurrences.replace(ds.ds[i].toString(), value + 1);
+      } else {
+        other_ds_rolls_and_occurrences.put(this.ds[i].toString(), new Integer(ds.ds[i].getValue()));
+      }
+    }
+
     if (this.count == ds.count && this.sides == ds.sides && this.sum() == ds.sum()) {
-      return true; }
-    else {
+      System.out.println("Same sum");
+      for(Map.Entry<String, Integer> entry : this_rolls_and_occurrences.entrySet()) {
+        String key = entry.getKey();
+        Integer value = entry.getValue();
+        System.out.println(key);
+        if (!other_ds_rolls_and_occurrences.containsKey(key)) { return false; }
+        else if (other_ds_rolls_and_occurrences.get(key) != value) { return false; }
+      }
+
+      return true;
+    } else {
       return false;
     }
   }
@@ -143,6 +174,13 @@ private Die[] ds = null;
   * A little test main to check things out
   */
   public static void main( String[] args ) {
+    DiceSet one_set = new DiceSet(5, 5);
+    DiceSet other_set = new DiceSet(5, 5);
+    //
+    // one_set.roll();
+    // other_set.roll();
+    // System.out.println(one_set.isIdentical(other_set));
+
     System.out.println("\nTESTS for invalid DiceSet(some_int, other_int) input:");
     try {
       System.out.print("DiceSet(0, 4) should throw excep.: ");
