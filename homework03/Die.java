@@ -51,19 +51,15 @@ public class Die {
   * Note: parameter must be checked for validity; invalid value must throw "IllegalArgumentException"
   */
   public Die( int nSides ) {
-    try { if (nSides < MINIMUM_SIDES) { throw new IllegalArgumentException(); } else { this.sides = nSides; } }
-    catch(IllegalArgumentException e) { System.exit("int sides too small"); }
-
-    // in real life, some side needs to be facing up
-    this.pips = Math.random() * this.sides + 1;
-  }
+    if(nSides < MINIMUM_SIDES) { throw new IllegalArgumentException(); } else { this.sides = nSides; }
+  }// }  System.exit(0); }
 
   /**
   * Roll THIS die and return the result
   * @return  integer value of the result of the roll, randomly selected
   */
   public int roll() {
-    this.pips = (int)Math.random() * this.sides + 1;
+    this.pips = (int)(Math.random() * this.sides) + 1;
     return this.pips;
   }
 
@@ -84,10 +80,7 @@ public class Die {
   * @throws      IllegalArgumentException
   */
   public void setSides( int sides ) {
-    try { if (sides < MINIMUM_SIDES) { throw new IllegalArgumentException(); } else { this.sides = nSides; } }
-    catch(IllegalArgumentException e) { System.exit("int sides too small"); }
-
-    this.pips = (int)Math.random() * this.sides + 1;
+    if(sides < MINIMUM_SIDES) { throw new IllegalArgumentException(); } else { this.sides = sides; }
   }
 
   /**
@@ -95,7 +88,7 @@ public class Die {
   * @return String representation of this Die
   */
   public String toString() {
-    return "[Sides: " + this.sides + "]";
+    return "[" + this.pips + "]";
   }
 
   /**
@@ -103,14 +96,50 @@ public class Die {
   * @return String representation of this Die
   */
   public static String toString( Die d ) {
-    return "pips: " + d.getValue();
+    return d.toString();
   }
 
   /**
   * A little test main to check things out
   */
   public static void main( String[] args ) {
-    System.out.println( "Hello world from the Die class..." );
+    System.out.println("\nTESTS for invalid Die(some_int) input:");
+    try { System.out.print("new Die(3) should throw exception: "); new Die(3); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+    try { System.out.print("new Die(2) should throw exception: "); new Die(2); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+    try { System.out.print("new Die(1) should throw exception: "); new Die(1); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+    try { System.out.print("new Die(0) should throw exception: "); new Die(0); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+
+    System.out.println("\nTESTS for valid roll() returns:");
+    System.out.println("Roll value for new Die(4) should be between 1-4: " + new Die(4).roll());
+    System.out.println("Roll value for new Die(10) should be between 1-10: " + new Die(10).roll());
+    System.out.println("Roll value for new Die(20) should be between 1-20: " + new Die(20).roll());
+    System.out.println("Roll value for new Die(50) should be between 1-50: " + new Die(50).roll());
+
+    System.out.println("\nTESTS if getValue() is equal to the value of a previous roll() call:");
+    try{ Die temp_die = new Die(4); System.out.println("getValue() equal to previous roll(): " + (temp_die.roll() == temp_die.getValue() ? "true" : "false")); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+    try{ Die temp_die = new Die(10); System.out.println("getValue() equal to previous roll(): " + (temp_die.roll() == temp_die.getValue() ? "true" : "false")); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+
+    System.out.println("\nTESTS for invalid setSides(some_int) input:");
+    try { Die temp_die = new Die(4); System.out.print("temp_die.setSides(2): "); temp_die.setSides(2); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+    try { Die temp_die = new Die(4); System.out.print("temp_die.setSides(3): "); temp_die.setSides(2); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+    try { Die temp_die = new Die(4); System.out.print("temp_die.setSides(1): "); temp_die.setSides(2); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+    try { Die temp_die = new Die(4); System.out.print("temp_die.setSides(0): "); temp_die.setSides(2); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+
+    System.out.println("\nTESTS for Static and public instance toString():");
+    try { Die temp_die = new Die(4); temp_die.roll(); System.out.println("temp_die.toString(): " + temp_die); }
+    catch(Exception e) { System.out.println(e + " caught"); }
+    try { Die temp_die = new Die(4); temp_die.roll(); System.out.println("Die.toString(temp_die): " + Die.toString(temp_die)); }
+    catch(Exception e) { System.out.println(e + " caught"); }
   }
 
 }
