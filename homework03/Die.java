@@ -1,7 +1,7 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  File name     :  Die.java
  *  Purpose       :  Provides a class describing a single die that can be rolled
- *  @author       :  B.J. Johnson
+ *  @author       :  B.J. Johnson, Nick Sunga
  *  Date          :  2017-02-06
  *  Description   :  This class provides the data fields and methods to describe a single game die.  A
  *                   die can have "N" sides.  Sides are randomly assigned sequential pip values, from 1

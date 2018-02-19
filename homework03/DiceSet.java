@@ -1,7 +1,7 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  File name     :  DiceSet.java
  *  Purpose       :  Provides a class describing a set of dice
- *  Author        :  B.J. Johnson
+ *  Author        :  B.J. Johnson, Nick Sunga
  *  Date          :  2017-02-09
  *  Description   :  This class provides everything needed (pretty much) to describe a set of dice.  The
  *                   idea here is to have an implementing class that uses the Die.java class.  Includes
@@ -89,7 +89,7 @@ private Die[] ds = null;
   * @throws IllegalArgumentException if the index is out of range
   */
   public int rollIndividual( int dieIndex ) {
-    if (dieIndex < this.ds.length || dieIndex > this.ds.length) { throw new IllegalArgumentException(); }
+    if (dieIndex < 0 || dieIndex > this.ds.length) { throw new IllegalArgumentException(); }
 
     return this.ds[dieIndex].roll();
   }
