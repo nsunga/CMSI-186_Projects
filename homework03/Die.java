@@ -52,7 +52,7 @@ public class Die {
   */
   public Die( int nSides ) {
     if(nSides < MINIMUM_SIDES) { throw new IllegalArgumentException(); } else { this.sides = nSides; }
-  }// }  System.exit(0); }
+  }
 
   /**
   * Roll THIS die and return the result
