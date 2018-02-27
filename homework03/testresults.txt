@@ -1,0 +1,760 @@
+
+TESTS for invalid Die(some_int) input:
+new Die(3) should throw exception: java.lang.IllegalArgumentException caught
+new Die(2) should throw exception: java.lang.IllegalArgumentException caught
+new Die(1) should throw exception: java.lang.IllegalArgumentException caught
+new Die(0) should throw exception: java.lang.IllegalArgumentException caught
+
+TESTS for valid roll() returns:
+Roll value for new Die(4) should be between 1-4: 3
+Roll value for new Die(10) should be between 1-10: 3
+Roll value for new Die(20) should be between 1-20: 8
+Roll value for new Die(50) should be between 1-50: 13
+
+TESTS if getValue() is equal to the value of a previous roll() call:
+getValue() equal to previous roll(): true
+getValue() equal to previous roll(): true
+
+TESTS for invalid setSides(some_int) input:
+temp_die.setSides(2): java.lang.IllegalArgumentException caught
+temp_die.setSides(3): java.lang.IllegalArgumentException caught
+temp_die.setSides(1): java.lang.IllegalArgumentException caught
+temp_die.setSides(0): java.lang.IllegalArgumentException caught
+
+TESTS for Static and public instance toString():
+temp_die.toString(): [2]
+Die.toString(temp_die): [3]
+
+TESTS for invalid DiceSet(some_int, other_int) input:
+DiceSet(0, 4) should throw excep.: java.lang.IllegalArgumentException caught
+DiceSet(3, 2) should throw excep.: java.lang.IllegalArgumentException caught
+DiceSet(-10, -10) should throw excep.: java.lang.IllegalArgumentException caught
+DiceSet(0, 0) should throw excep.: java.lang.IllegalArgumentException caught
+
+TESTS for roll() outputs:
+Values for DiceSet(5, 10) should be between 1-10: [7][6][1][2][5]
+Values for DiceSet(5, 6) should be between 1-6: [6][4][2][1][6]
+Values for DiceSet(3, 4) should be between 1-4: [1][2][3]
+
+TESTS for isIdentical():
+Two unrolled and equal sets should be true: true
+Two rolled and equal sets can be true or false: false
+TESTING THE DIE CLASS: TEST CONSTRUCTOR FOR INVALID NUMBERS OF SIDES:
+   Too few sides requested to constructor....
+   Too few sides requested to constructor....
+   Too few sides requested to constructor....
+   Too few sides requested to constructor....
+TESTING THE DIE CLASS: TESTS ON 4-SIDED DIE:
+   roll() test for 4 sided die:
+   You rolled a 3
+   You rolled a 1
+   You rolled a 1
+   You rolled a 4
+   You rolled a 2
+   Current value is: [2]
+TESTING THE DIE CLASS: TESTS ON 5-SIDED DIE:
+   roll() test for 5 sided die:
+   You rolled a 3
+   You rolled a 4
+   You rolled a 3
+   You rolled a 5
+   You rolled a 5
+   Current value is: [5]
+TESTING THE DIE CLASS: TESTS ON 6-SIDED DIE:
+   roll() test for 6 sided die:
+   You rolled a 2
+   You rolled a 3
+   You rolled a 4
+   You rolled a 1
+   You rolled a 2
+   Current value is: [2]
+TESTING THE DIE CLASS: TESTS ON 7-SIDED DIE:
+   roll() test for 7 sided die:
+   You rolled a 7
+   You rolled a 3
+   You rolled a 3
+   You rolled a 5
+   You rolled a 5
+   Current value is: [5]
+TESTING THE DIE CLASS: TESTS ON 8-SIDED DIE:
+   roll() test for 8 sided die:
+   You rolled a 7
+   You rolled a 3
+   You rolled a 6
+   You rolled a 4
+   You rolled a 8
+   Current value is: [8]
+TESTING THE DIE CLASS: TESTS ON 11-SIDED DIE USING NEW SIDE COUNT:
+   Rolling with new side count --
+      You rolled a 1
+      You rolled a 3
+      You rolled a 10
+      You rolled a 1
+      You rolled a 10
+TESTING THE DIE CLASS: TESTS ON 17-SIDED DIE USING NEW SIDE COUNT:
+   Rolling with new side count --
+      You rolled a 4
+      current value is: 4
+TESTING THE DIE CLASS: TESTS ON 111-SIDED DIE USING NEW SIDE COUNT:
+   Rolling with new side count --
+      You rolled a 86
+      current value is: 86
+......End of Die Class Testing.....
+
+
+TESTING THE DICESET CLASS: TEST CONSTRUCTOR FOR 3 SIX-SIDED DICE:
+  DiceSet: 3 dice, six sided - ds36:
+      initialized ds36 contents             : [0][0][0]
+      after collective roll ds36 contents   : [2][6][1]
+      after individual roll(2) ds36 contents: [2][6][6]
+      sum of dice values is: 14
+   Re-rolling all dice
+      after collective roll ds36 contents   : [1][4][6]
+      after individual roll(2) ds36 contents: [1][4][2]
+      sum of dice values is                 : 7
+   Test of getIndividual():
+
+TEST BLOWS UP AND WON'T COMPLETE.  ERROR MESSAGE DISPLAYED IS AS FOLLOWS:
+
+   Exception in thread "main" java.lang.IllegalArgumentException
+        at DiceSet.getIndividual(DiceSet.java:103)
+        at DieAndDiceSetTestHarness.main(DieAndDiceSetTestHarness.java:148)
+
+
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 5
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 1
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 4
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+SCORE: 16
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+High score saved.
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+CURRENT HIGH SCORE: 16
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 2
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 6
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+SCORE: 16
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Sum: 16 <= High Score: 16
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+CURRENT HIGH SCORE: 16
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+QUITTING GAME
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 9
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 14
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 4
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+SCORE: 115
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+High score saved.
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+CURRENT HIGH SCORE: 115
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 3
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 2
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+SCORE: 92
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Sum: 92 <= High Score: 115
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+CURRENT HIGH SCORE: 115
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+QUITTING GAME
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Exception java.lang.IllegalArgumentException
+
+START OVER ON FINAL RUN THROUGH:
+
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Exception java.util.NoSuchElementException
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 14
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 13
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 8
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+SCORE: 117
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+High score saved.
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+CURRENT HIGH SCORE: 117
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 7
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 15
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+SCORE: 96
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Sum: 96 <= High Score: 117
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+CURRENT HIGH SCORE: 117
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+QUITTING GAME
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 3
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 2
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 1
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+SCORE: 72
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+High score saved.
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+CURRENT HIGH SCORE: 72
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 3
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Enter die index for roll: Rolled a 3
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+SCORE: 71
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+Sum: 71 <= High Score: 72
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+CURRENT HIGH SCORE: 72
+*************************************
+* 1. ROLL ALL DIE             (1)   *
+* 2. ROLL A SINGLE DIE        (2)   *
+* 3. CACLULATE SCORE          (3)   *
+* 4. SAVE SCORE AS HIGH SCORE (4)   *
+* 5. DISPLAY HIGH SCORE       (5)   *
+* 6. QUIT                     (Q)   *
+*************************************
+QUITTING GAME
