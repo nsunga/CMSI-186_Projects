@@ -24,7 +24,7 @@ public class ClockSolver {
   */
   private final double MAX_TIME_SLICE_IN_SECONDS  = 1800.00;
   private final double DEFAULT_TIME_SLICE_SECONDS = 60.0;
-  private final double EPSILON_VALUE              = 9;      // small value for double-precision comparisons
+  private final double EPSILON_VALUE              = 0.1;      // small value for double-precision comparisons
   public Clock clock; // used to find equal angles when solving ClockSolver
   /**
   *  Constructor
