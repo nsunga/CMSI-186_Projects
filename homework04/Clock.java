@@ -26,22 +26,33 @@ public class Clock {
   private static final double MAXIMUM_DEGREE_VALUE = 360.0;
   private static final double HOUR_HAND_DEGREES_PER_SECOND = 0.00834;
   private static final double MINUTE_HAND_DEGREES_PER_SECOND = 0.1;
+  private static final double MAXIMUM_TIME_SLICE_VALUE = 1800.0;
 
+  private double time_slice;
+  private double seconds;
+  private double given_angle;
   /**
   *  Constructor goes here
   */
   public Clock() {
-
+    this.time_slice = DEFAULT_TIME_SLICE_IN_SECONDS;
+    this.given_angle = 0.0;
+    this.seconds = 0.0;
   }
 
+  public Clock(double given_angle) {
+    this.time_slice = DEFAULT_TIME_SLICE_IN_SECONDS;
+    this.given_angle = given_angle;
+    this.seconds = 0.0;
+  }
   /**
   *  Methods go here
-  *
+  *ex
   *  Method to calculate the next tick from the time increment
   *  @return double-precision value of the current clock tick
   */
   public double tick() {
-    return 0.0;
+    return this.seconds += this.time_slice;
   }
 
   /**
@@ -51,7 +62,10 @@ public class Clock {
   *  @throws  NumberFormatException
   */
   public double validateAngleArg( String argValue ) throws NumberFormatException {
-    return 0.0;
+    double valid_angle = Double.parseDouble(argValue);
+
+    if (valid_angle <= MAXIMUM_DEGREE_VALUE && valid_angle >= 0) { return valid_angle; }
+    throw new NumberFormatException(); // should use exception?
   }
 
   /**
@@ -66,7 +80,10 @@ public class Clock {
   *         to take a VERY LONG TIME to complete!
   */
   public double validateTimeSliceArg( String argValue ) {
-    return 0.0;
+    double valid_time_slice = Double.parseDouble(argValue);
+
+    if (valid_time_slice < MAXIMUM_TIME_SLICE_VALUE && valid_time_slice > 0) { return valid_time_slice; }
+    return INVALID_ARGUMENT_VALUE;
   }
 
   /**
@@ -74,7 +91,7 @@ public class Clock {
   *  @return double-precision value of the hour hand location
   */
   public double getHourHandAngle() {
-    return 0.0;
+    return HOUR_HAND_DEGREES_PER_SECOND * this.seconds % 360;
   }
 
   /**
@@ -82,7 +99,7 @@ public class Clock {
   *  @return double-precision value of the minute hand location
   */
   public double getMinuteHandAngle() {
-    return 0.0;
+    return MINUTE_HAND_DEGREES_PER_SECOND * this.seconds % 360;
   }
 
   /**
@@ -90,6 +107,9 @@ public class Clock {
   *  @return double-precision value of the angle between the two hands
   */
   public double getHandAngle() {
+    double hand_angle = Math.abs(this.getHourHandAngle() - this.getMinuteHandAngle());
+
+    if (hand_angle > 180.0) { return 360.0 - hand_angle; }
     return 0.0;
   }
 
@@ -99,7 +119,7 @@ public class Clock {
   *  @return double-precision value the total seconds private variable
   */
   public double getTotalSeconds() {
-    return 0.0;
+    return this.seconds;
   }
 
   /**
@@ -107,7 +127,7 @@ public class Clock {
   *  @return String value of the current clock
   */
   public String toString() {
-    return "Clock string, dangit!";
+    return "CURRENT TIME => " + (int)this.seconds/3600 + ":" + (int)(this.seconds/60)%60 + ":" + this.seconds%60;
   }
 
   /**
@@ -127,6 +147,18 @@ public class Clock {
     System.out.println( "    Testing validateAngleArg()....");
     System.out.print( "      sending '  0 degrees', expecting double value   0.0" );
     try { System.out.println( (0.0 == clock.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
+    catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+    System.out.print( "      sending '  15.0 degrees', expecting double value   15.0" );
+    try { System.out.println( (15.0 == clock.validateAngleArg( "15.0" )) ? " - got 15.0" : " - no joy" ); }
+    catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+    System.out.print( "      sending '  180.5 degrees', expecting double value   180.5" );
+    try { System.out.println( (180.5 == clock.validateAngleArg( "180.5" )) ? " - got 180.5" : " - no joy" ); }
+    catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+    System.out.print( "      sending '  360.1 degrees', expecting NFE" );
+    try { System.out.println( (360.1 == clock.validateAngleArg( "360.1" )) ? " - got 360.1" : " - no joy" ); }
+    catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+    System.out.print( "      sending '  270.12 degrees', expecting double value   270.12" );
+    try { System.out.println( (270.12 == clock.validateAngleArg( "270.12" )) ? " - got 270.12" : " - no joy" ); }
     catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
   }
 }
