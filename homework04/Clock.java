@@ -1,7 +1,7 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  File name     :  Clock.java
  *  Purpose       :  Provides a class defining methods for the ClockSolver class
- *  @author       :  B.J. Johnson
+ *  @author       :  B.J. Johnson, Nick Sunga
  *  Date written  :  2017-02-28
  *  Description   :  This class provides a bunch of methods which may be useful for the ClockSolver class
  *                   for Homework 4, part 1.  Includes the following:
@@ -40,12 +40,21 @@ public class Clock {
     this.seconds = 0.0;
   }
 
+  /**
+  *  Constructor
+  * @param given_angle => angle for the clock
+  */
   public Clock(double given_angle) {
     this.time_slice = DEFAULT_TIME_SLICE_IN_SECONDS;
     this.given_angle = given_angle;
     this.seconds = 0.0;
   }
 
+  /**
+  *  Constructor
+  * @param given_angle => angle for the clock
+  * @param time_slice => time slice for the clock
+  */
   public Clock(double given_angle, double time_slice) {
     this.time_slice = time_slice;
     this.given_angle = given_angle;
@@ -71,7 +80,7 @@ public class Clock {
     double valid_angle = Double.parseDouble(argValue);
 
     if (valid_angle <= MAXIMUM_DEGREE_VALUE && valid_angle >= 0) { return valid_angle; }
-    throw new NumberFormatException(); // should use exception?
+    throw new NumberFormatException();
   }
 
   /**
