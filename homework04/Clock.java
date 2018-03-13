@@ -45,6 +45,12 @@ public class Clock {
     this.given_angle = given_angle;
     this.seconds = 0.0;
   }
+
+  public Clock(double given_angle, double time_slice) {
+    this.time_slice = time_slice;
+    this.given_angle = given_angle;
+    this.seconds = 0.0;
+  }
   /**
   *  Methods go here
   *ex
@@ -110,7 +116,7 @@ public class Clock {
     double hand_angle = Math.abs(this.getHourHandAngle() - this.getMinuteHandAngle());
 
     if (hand_angle > 180.0) { return 360.0 - hand_angle; }
-    return 0.0;
+    return hand_angle;
   }
 
   /**
@@ -129,7 +135,6 @@ public class Clock {
   public String toString() {
     return "CURRENT TIME => " + (int)this.seconds/3600 + ":" + (int)(this.seconds/60)%60 + ":" + this.seconds%60;
   }
-
   /**
   *  The main program starts here
   *  remember the constraints from the project description
@@ -160,5 +165,32 @@ public class Clock {
     System.out.print( "      sending '  270.12 degrees', expecting double value   270.12" );
     try { System.out.println( (270.12 == clock.validateAngleArg( "270.12" )) ? " - got 270.12" : " - no joy" ); }
     catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+    System.out.println( "    Testing validateTimeSliceArg()....");
+    System.out.print( "      sending '  1800 time slice', expecting double value   -1.0" );
+    try { System.out.println( (-1.0 == clock.validateTimeSliceArg( "1800" )) ? " - got -1.0" : " - no joy" ); }
+    catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+    System.out.print( "      sending '  1512.343 time slice', expecting double value   1512.343" );
+    try { System.out.println( (1512.343 == clock.validateTimeSliceArg( "1512.343" )) ? " - got 1512.343" : " - no joy" ); }
+    catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+    System.out.print( "      sending '  -123 time slice', expecting double value   -1.0" );
+    try { System.out.println( (-1.0 == clock.validateTimeSliceArg( "-123" )) ? " - got -1.0" : " - no joy" ); }
+    catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+    System.out.print( "      sending '  1274.09 time slice', expecting double value   1274.09" );
+    try { System.out.println( (1274.09 == clock.validateTimeSliceArg( "1274.09" )) ? " - got 1274.09" : " - no joy" ); }
+    catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+    System.out.print( "      sending '  43.8 time slice', expecting double value   43.8" );
+    try { System.out.println( (43.8 == clock.validateTimeSliceArg( "43.8" )) ? " - got 43.8" : " - no joy" ); }
+    catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+    Clock clock_two = new Clock();
+    System.out.println("12 hour clock cycle, Timeslice = 60");
+    do {
+      System.out.println(clock_two);
+      System.out.println("HOUR HAND ANGLE => " + clock_two.getHourHandAngle());
+      System.out.println("MINUTE HAND ANGLE => " + clock_two.getMinuteHandAngle());
+      System.out.println("HAND ANGLE BETWEEN => " + clock_two.getHandAngle() + "\n");
+      clock_two.tick();
+    } while (clock_two.getTotalSeconds() < 43200);
   }
 }
