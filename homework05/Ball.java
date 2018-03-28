@@ -22,7 +22,7 @@ public class Ball {
     this.time_slice = time_slice;
   }
 
-  public void next_position() {
+  public void move() {
     this.x_coord += this.dx * this.time_slice;
     this.y_coord += this.dy * this.time_slice;
     if (Math.abs(this.dx) >= 1) { this.dx *= Math.pow(FRICTION, time_slice); }

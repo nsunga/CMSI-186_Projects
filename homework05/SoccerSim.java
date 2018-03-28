@@ -30,6 +30,13 @@ public class SoccerSim {
 
     return true;
   }
+
+  public static void change_position(ArrayList<Ball> soccer_balls) {
+    for (int i = 0; i < soccer_balls.size(); i++) {
+      soccer_balls.get(i).move();
+    }
+  }
+
   public static void main(String[] args) {
     Clock valid_clock;
     Double valid_time_slice = -1.0;
@@ -60,5 +67,7 @@ public class SoccerSim {
 
     System.out.println(valid_clock.toString());
     valid_clock.tick();
+
+    change_position(soccer_balls);
   }
 }
