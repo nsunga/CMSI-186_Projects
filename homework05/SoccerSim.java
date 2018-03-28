@@ -57,9 +57,7 @@ public class SoccerSim {
   * @param soccer_balls: ArrayList of Balls
   */
   public static void change_position(ArrayList<Ball> soccer_balls) {
-    for (int i = 0; i < soccer_balls.size(); i++) {
-      soccer_balls.get(i).move();
-    }
+    for (int i = 0; i < soccer_balls.size(); i++) { soccer_balls.get(i).move(); }
   }
 
   /**
