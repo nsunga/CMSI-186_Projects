@@ -4,8 +4,6 @@ public class Ball {
   private double dx;
   private double dy;
   private double time_slice;
-  private static final double RADIUS = 4.45;
-  private static final double DIAMETER = 2 * RADIUS;
   private static final double FRICTION = 0.99;
 
   public Ball(double x_coord, double y_coord, double dx, double dy) {
@@ -25,12 +23,17 @@ public class Ball {
   }
 
   public void next_position() {
-    this.x_coord *= this.dx * this.time_slice;
-    this.y_coord *= this.dy * this.time_slice;
-    if (this.dx > 1) { this.dx *= FRICTION * time_slice; }
-    if (this.dy > 1) { this.dy *= FRICTION * time_slice; }
+    this.x_coord += this.dx * this.time_slice;
+    this.y_coord += this.dy * this.time_slice;
+    if (Math.abs(this.dx) >= 1) { this.dx *= Math.pow(FRICTION, time_slice); }
+    else { this.dx *= 0.0; }
+    if (Math.abs(this.dy) >= 1) { this.dy *= Math.pow(FRICTION, time_slice); }
+    else { this.dy *= 0.0; }
   }
 
   public double get_x_coord() { return this.x_coord; }
   public double get_y_coord() { return this.y_coord; }
+  public double get_dx() { return this.dx; }
+  public double get_dy() { return this.dy; }
+  public double get_ts() { return this.time_slice; }
 }
