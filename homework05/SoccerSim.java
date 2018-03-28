@@ -1,9 +1,26 @@
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  File name     :  SoccerSim.java
+ *  Purpose       :  The main program for the SoccerSim class
+ *  @see
+ *  @author       :  Nick Sunga
+ *  Date written  :  2018-03-28
+ *  Description   :  Provideds the implementation for the soccer ball collision simulator
+ *
+ *  Notes         :  None
+ *  Warnings      :  None
+ *  Exceptions    :  None
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 import java.util.ArrayList;
 
 public class SoccerSim {
   public static final double RADIUS = 4.45;
   public static final double DIAMETER = 2 * RADIUS;
 
+  /**
+  *  If the balls are at rest, the simulation is done, no collision
+  * @param soccer_balls: ArrayList of Balls
+  */
   public static boolean done_simulating(ArrayList<Ball> soccer_balls) {
     for (int i = 0; i < soccer_balls.size(); i++) {
       if (soccer_balls.get(i).get_dx() != 0.0) { return true; }
@@ -13,6 +30,10 @@ public class SoccerSim {
     return false;
   }
 
+  /**
+  *  Checks if collisions occurred
+  * @param soccer_balls: ArrayList of Balls
+  */
   public static boolean collision_simulator(ArrayList<Ball> soccer_balls) {
     for (int i = 0; i < soccer_balls.size(); i++) {
       for (int j = i + 1; j < soccer_balls.size(); j++) {
@@ -31,12 +52,20 @@ public class SoccerSim {
     return true;
   }
 
+  /**
+  *  Changes position of every soccer ball
+  * @param soccer_balls: ArrayList of Balls
+  */
   public static void change_position(ArrayList<Ball> soccer_balls) {
     for (int i = 0; i < soccer_balls.size(); i++) {
       soccer_balls.get(i).move();
     }
   }
 
+  /**
+  *  Prints out the coordinates and velocity of every soccer ball
+  * @param soccer_balls: ArrayList of Balls
+  */
   public static void get_soccer_info(ArrayList<Ball> soccer_balls) {
     for (int i = 0; i < soccer_balls.size(); i++) {
       if (i == 0) {
@@ -57,6 +86,10 @@ public class SoccerSim {
     }
   }
 
+  /**
+  *  Prints if the soccer ball is no longer in motion
+  * @param soccer_balls: ArrayList of Balls
+  */
   public static void at_rest(ArrayList<Ball> soccer_balls) {
     for (int i = 1; i < soccer_balls.size(); i++) {
       if (soccer_balls.get(i).get_dx() == 0.0 && soccer_balls.get(i).get_dy() == 0.0) {
@@ -65,6 +98,13 @@ public class SoccerSim {
     }
   }
 
+  /**
+    *  The main program starts here
+    *  @param  args  String array of the arguments from the command line
+    *                Every four arguments should pertain to a ball.
+    *                Last arg pertains to the time_slice. If none given,
+    *                default is specified in Ball.java
+    */
   public static void main(String[] args) {
     Clock valid_clock;
     Double valid_time_slice = -1.0;
