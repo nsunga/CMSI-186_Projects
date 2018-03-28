@@ -4,7 +4,7 @@ public class SoccerSim {
   public static final double RADIUS = 4.45;
   public static final double DIAMETER = 2 * RADIUS;
 
-  public static boolean at_rest(ArrayList<Ball> soccer_balls) {
+  public static boolean done_simulating(ArrayList<Ball> soccer_balls) {
     for (int i = 0; i < soccer_balls.size(); i++) {
       if (soccer_balls.get(i).get_dx() != 0.0) { return true; }
       if (soccer_balls.get(i).get_dy() != 0.0) { return true; }
@@ -34,6 +34,34 @@ public class SoccerSim {
   public static void change_position(ArrayList<Ball> soccer_balls) {
     for (int i = 0; i < soccer_balls.size(); i++) {
       soccer_balls.get(i).move();
+    }
+  }
+
+  public static void get_soccer_info(ArrayList<Ball> soccer_balls) {
+    for (int i = 0; i < soccer_balls.size(); i++) {
+      if (i == 0) {
+        System.out.println("Pole: coords( " +
+          soccer_balls.get(i).get_x_coord() + ", " +
+          soccer_balls.get(i).get_y_coord() + ") velocity(" +
+          soccer_balls.get(i).get_dx() + ", " +
+          soccer_balls.get(i).get_dy() + ")"
+        );
+      } else {
+        System.out.println("Soccer ball " + i + " : coords( " +
+          soccer_balls.get(i).get_x_coord() + ", " +
+          soccer_balls.get(i).get_y_coord() + ") velocity(" +
+          soccer_balls.get(i).get_dx() + ", " +
+          soccer_balls.get(i).get_dy() + ")"
+        );
+      }
+    }
+  }
+
+  public static void at_rest(ArrayList<Ball> soccer_balls) {
+    for (int i = 1; i < soccer_balls.size(); i++) {
+      if (soccer_balls.get(i).get_dx() == 0.0 && soccer_balls.get(i).get_dy() == 0.0) {
+        System.out.println("soccer ball " + i + " not in motion");
+      }
     }
   }
 
@@ -68,6 +96,16 @@ public class SoccerSim {
     System.out.println(valid_clock.toString());
     valid_clock.tick();
 
-    change_position(soccer_balls);
+    get_soccer_info(soccer_balls);
+
+    while (done_simulating(soccer_balls) && collision_simulator(soccer_balls)) {
+      System.out.println(valid_clock.toString());
+      valid_clock.tick();
+
+      change_position(soccer_balls);
+      get_soccer_info(soccer_balls);
+      at_rest(soccer_balls);
+      System.out.println("\n");
+    }
   }
 }
