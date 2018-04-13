@@ -21,7 +21,7 @@
  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 import java.util.Arrays;
 
-public class BrobIntTemplate {
+public class BrobInt {
 
    public static final BrobInt ZERO     = new BrobInt(  "0" );      /// Constant for "zero"
    public static final BrobInt ONE      = new BrobInt(  "1" );      /// Constant for "one"
@@ -54,8 +54,25 @@ public class BrobIntTemplate {
    *   for later use
    *  @param  value  String value to make into a BrobInt
    */
-   public BrobIntTemplate( String value ) {
-      super();
+   public BrobInt( String value ) {
+     super();
+     this.internalValue = value;
+     if (value.substring(0,1).equals("-")) {
+       this.sign = 1;
+       this.byteVersion = new byte[value.length() - 1];
+       byteInitializer(value, 2);
+     } else {
+       this.byteVersion = new byte[value.length()];
+       byteInitializer(value, 1);
+     }
+   }
+
+   private void byteInitializer(String value, int cond) {
+     int index = 0;
+     for (int i = value.length(); i >= cond; i--) {
+       this.byteVersion[index++] = Byte.parseByte(value.substring(i-1, i));
+       this.reversed += value.substring(i-1, i);
+     }
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
