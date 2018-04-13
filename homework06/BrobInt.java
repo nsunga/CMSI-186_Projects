@@ -83,7 +83,11 @@ public class BrobInt {
    *  note also that this must check for the '+' and '-' sign digits
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public boolean validateDigits() {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+     for (int i = 0; i < this.byteVersion.length; i++) {
+       if (this.byteVersion[i] < 0) { throw new IllegalArgumentException("\nSorry, that operation is not yet implemented."); }
+       if (this.byteVersion[i] > 10) { throw new IllegalArgumentException("\nSorry, that operation is not yet implemented."); }
+     }
+     return true;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -91,7 +95,8 @@ public class BrobInt {
    *  @return BrobInt that is the reverse of the value of this BrobInt
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt reverser() {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+     if (this.sign == 0) { return new BrobInt(this.reversed); }
+     return new BrobInt("-" + this.reversed);
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
