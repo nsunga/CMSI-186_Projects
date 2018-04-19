@@ -249,7 +249,8 @@ public class BrobInt {
   *  @return BrobInt that is the product of the value of this BrobInt and the one passed in
   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   public BrobInt multiply( BrobInt gint ) {
-    throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+    if (gint.internalValue.equals("0") || this.internalValue.equals("0")) { return ZERO; }
+    else { return TEN; } // place holder case for now
   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
