@@ -192,6 +192,7 @@ public class BrobInt {
             carry = true;
           } else {
             brob_value = Integer.toString(this.byteVersion[i] + 1) + brob_value;
+            carry = false;
           }
         } else {
           brob_value = Integer.toString(this.byteVersion[i]) + brob_value;
@@ -203,6 +204,7 @@ public class BrobInt {
             carry = true;
           } else {
             brob_value = Integer.toString(gint.byteVersion[i] + 1) + brob_value;
+            carry = false;
           }
         } else {
           brob_value = Integer.toString(gint.byteVersion[i]) + brob_value;
@@ -210,6 +212,7 @@ public class BrobInt {
       } else if (this.byteVersion[i] + gint.byteVersion[i] > 9) {
           if (carry) {
             brob_value = Integer.toString((this.byteVersion[i] + gint.byteVersion[i] + 1) % 10) + brob_value;
+            carry = false;
           } else {
             brob_value = Integer.toString((this.byteVersion[i] + gint.byteVersion[i]) % 10) + brob_value;
           }
