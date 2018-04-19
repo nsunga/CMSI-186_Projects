@@ -1,7 +1,7 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * File name  :  Fibonacci.java
  * Purpose    :  Find the "nth" Fibonacci number given an argument, using BrobInt class
- * @author    :  B.J. Johnson
+ * @author    :  B.J. Johnson, Nick Sunga
  * Date       :  2017-04-17
  * Description:  @see <a href='http://bjohnson.lmu.build/cmsi186web/homework06.html'>Assignment Page</a>
  * Notes      :  None
@@ -34,6 +34,31 @@
 
    public Fibonacci() {
       super();
+   }
+
+   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   *  Computes the nth fib number STARTING FROM 0th POSITION
+   *  Note: static method
+   *  @param  int           The nth fib number starting from 0th position
+   *  @return BrobInt that contains the nth fib number.
+   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+   public static BrobInt compute(int num) {
+     BrobInt firstTerm = BrobInt.ZERO;
+     BrobInt secondTerm = BrobInt.ONE;
+     BrobInt reference = BrobInt.ZERO;
+     BrobInt numBrob = BrobInt.ZERO;
+
+     if (num == 0) { return BrobInt.ZERO; }
+     else if (num == 1) { return BrobInt.ONE; }
+     else if (num == 2) { return BrobInt.TWO; }
+     else {
+       for (int i = 0; i < num; i++) {
+         numBrob = secondTerm.addByte(firstTerm);
+         firstTerm = secondTerm;
+         secondTerm = numBrob;
+       }
+       return numBrob;
+     }
    }
 
    public static void main( String[] args ) {
@@ -83,6 +108,7 @@
          System.out.println( "\n                This may take me a while; please be patient!!\n\n" );
       }
 
+      System.out.println(Fibonacci.compute(Integer.parseInt(args[0])));
       System.out.println( "\n\n\n  ...HA!! Like I'm going to do the ENTIRE thing for you.....  *grins*" );
 
 

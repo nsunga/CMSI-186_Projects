@@ -1,7 +1,7 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * File name  :  BrobInt.java
  * Purpose    :  Learning exercise to implement arbitrarily large numbers and their operations
- * @author    :  B.J. Johnson
+ * @author    :  B.J. Johnson, Nick Sunga
  * Date       :  2017-04-04
  * Description:  @see <a href='http://bjohnson.lmu.build/cmsi186web/homework06.html'>Assignment Page</a>
  * Notes      :  None
