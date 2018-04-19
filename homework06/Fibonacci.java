@@ -45,7 +45,6 @@
    public static BrobInt compute(int num) {
      BrobInt firstTerm = BrobInt.ZERO;
      BrobInt secondTerm = BrobInt.ONE;
-     BrobInt reference = BrobInt.ZERO;
      BrobInt numBrob = BrobInt.ZERO;
 
      if (num == 0) { return BrobInt.ZERO; }
