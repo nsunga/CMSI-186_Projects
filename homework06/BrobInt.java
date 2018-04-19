@@ -262,7 +262,12 @@ public class BrobInt {
   *  @return BrobInt that is the dividend of this BrobInt divided by the one passed in
   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   public BrobInt divide( BrobInt gint ) {
-    throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+    if (gint.internalValue.equals("0")) {
+      System.out.println("Can't Divide by Zero");
+      return ZERO;
+    } else if (this.internalValue.equals("0")) {
+      return ZERO;
+    } else { return TEN; }
   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
