@@ -123,22 +123,22 @@ public class BrobInt {
   *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   public BrobInt addByte( BrobInt gint ) {
-    String result = new String();
+    String brob_value = new String();
 
     if (gint.sign == this.sign) {
-      result = adderSameSign(gint);
-      if (this.sign == 0 && gint.sign == 0) { return new BrobInt(result); }
-      else { return new BrobInt("-" + result); }
+      brob_value = adderSameSign(gint);
+      if (this.sign == 0 && gint.sign == 0) { return new BrobInt(brob_value); }
+      else { return new BrobInt("-" + brob_value); }
     } else {
       if (this.compareTo(new BrobInt(gint.toString().substring(1))) == 0) { return ZERO; }
       else if (this.compareTo(gint) > 0) {
-        result = adder(this, gint);
-        if (this.sign == 0) { return new BrobInt(result); }
-        else { return new BrobInt("-" + result); }
+        brob_value = adder(this, gint);
+        if (this.sign == 0) { return new BrobInt(brob_value); }
+        else { return new BrobInt("-" + brob_value); }
       } else {
-        result = adder(gint, this);
-        if (gint.sign == 0) { return new BrobInt(result); }
-        else { return new BrobInt("-" + result); }
+        brob_value = adder(gint, this);
+        if (gint.sign == 0) { return new BrobInt(brob_value); }
+        else { return new BrobInt("-" + brob_value); }
       }
     }
   }
@@ -151,26 +151,26 @@ public class BrobInt {
   *  @return String that should be the value of the new BrobInt
   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   private static String adder(BrobInt bigger, BrobInt smaller) {
-    String result = new String();
+    String brob_value = new String();
     int additionsNeeded = bigger.byteVersion.length;
 
     for (int i = 0; i < additionsNeeded; i++){
       if (i > smaller.byteVersion.length-1) {
         if (bigger.byteVersion[i] == -1 && i + 1 < additionsNeeded) {
-          result = "9" + result;
+          brob_value = "9" + brob_value;
           bigger.byteVersion[i+1] = new Byte(Integer.toString(bigger.byteVersion[i+1] - 1));
         } else if (bigger.byteVersion[i] > 0) {
-          result = Integer.toString(bigger.byteVersion[i]) + result;
+          brob_value = Integer.toString(bigger.byteVersion[i]) + brob_value;
         }
       } else if (smaller.byteVersion[i] > bigger.byteVersion[i]) {
-        result = Integer.toString(bigger.byteVersion[i] + 10 - smaller.byteVersion[i]) + result;
+        brob_value = Integer.toString(bigger.byteVersion[i] + 10 - smaller.byteVersion[i]) + brob_value;
         bigger.byteVersion[i+1] = new Byte(Integer.toString(bigger.byteVersion[i+1] - 1));
       } else {
-        result = Integer.toString(bigger.byteVersion[i] - smaller.byteVersion[i]) + result;
+        brob_value = Integer.toString(bigger.byteVersion[i] - smaller.byteVersion[i]) + brob_value;
       }
     }
 
-    return result;
+    return brob_value;
   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -180,7 +180,7 @@ public class BrobInt {
   *  @return String that should be the value of the new BrobInt
   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   private String adderSameSign(BrobInt gint) {
-    String result = new String();
+    String brob_value = new String();
     boolean carry = false;
     int additionsNeeded = Math.max(gint.byteVersion.length, this.byteVersion.length);
 
@@ -188,49 +188,49 @@ public class BrobInt {
       if (gint.byteVersion.length - 1 < i) {
         if (carry) {
           if (this.byteVersion[i] + 1 > 9) {
-            result = Integer.toString((this.byteVersion[i] + 1) % 10) + result;
+            brob_value = Integer.toString((this.byteVersion[i] + 1) % 10) + brob_value;
             carry = true;
           } else {
-            result = Integer.toString(this.byteVersion[i] + 1) + result;
+            brob_value = Integer.toString(this.byteVersion[i] + 1) + brob_value;
           }
         } else {
-          result = Integer.toString(this.byteVersion[i]) + result;
+          brob_value = Integer.toString(this.byteVersion[i]) + brob_value;
         }
       } else if (this.byteVersion.length - 1 < i) {
         if (carry) {
           if (gint.byteVersion[i] + 1 > 9) {
-            result = Integer.toString((gint.byteVersion[i] + 1) % 10) + result;
+            brob_value = Integer.toString((gint.byteVersion[i] + 1) % 10) + brob_value;
             carry = true;
           } else {
-            result = Integer.toString(gint.byteVersion[i] + 1) + result;
+            brob_value = Integer.toString(gint.byteVersion[i] + 1) + brob_value;
           }
         } else {
-          result = Integer.toString(gint.byteVersion[i]) + result;
+          brob_value = Integer.toString(gint.byteVersion[i]) + brob_value;
         }
       } else if (this.byteVersion[i] + gint.byteVersion[i] > 9) {
           if (carry) {
-            result = Integer.toString((this.byteVersion[i] + gint.byteVersion[i] + 1) % 10) + result;
+            brob_value = Integer.toString((this.byteVersion[i] + gint.byteVersion[i] + 1) % 10) + brob_value;
           } else {
-            result = Integer.toString((this.byteVersion[i] + gint.byteVersion[i]) % 10) + result;
+            brob_value = Integer.toString((this.byteVersion[i] + gint.byteVersion[i]) % 10) + brob_value;
           }
           carry = true;
       } else {
         if (carry) {
           if (this.byteVersion[i] + gint.byteVersion[i] + 1 > 9) {
-            result = Integer.toString((this.byteVersion[i] + gint.byteVersion[i] + 1) % 10) + result;
+            brob_value = Integer.toString((this.byteVersion[i] + gint.byteVersion[i] + 1) % 10) + brob_value;
             carry = true;
           } else {
-            result = Integer.toString(this.byteVersion[i] + gint.byteVersion[i] + 1) + result;
+            brob_value = Integer.toString(this.byteVersion[i] + gint.byteVersion[i] + 1) + brob_value;
             carry = false;
           }
         } else {
-          result = Integer.toString(this.byteVersion[i] + gint.byteVersion[i]) + result;
+          brob_value = Integer.toString(this.byteVersion[i] + gint.byteVersion[i]) + brob_value;
         }
       }
     }
 
-    if (carry) { result = "1" + result; }
-    return result;
+    if (carry) { brob_value = "1" + brob_value; }
+    return brob_value;
   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
