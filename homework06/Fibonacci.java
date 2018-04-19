@@ -16,7 +16,7 @@
  *
  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-public class FibonacciTemplate {
+ public class Fibonacci {
 
    private static final String usageMessage = "\n  You must enter an integer number....." +
                                               "\n    Please try again!" +
@@ -32,7 +32,7 @@ public class FibonacciTemplate {
    private static final  int NO_CMD_LINE_ARGS = -1;
    private static final  int BAD_CMD_LINE_ARG = -2;
 
-   public FibonacciTemplate() {
+   public Fibonacci() {
       super();
    }
 
