@@ -232,14 +232,6 @@ public class BrobInt {
     if (carry) { result = "1" + result; }
     return result;
   }
-  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  *  Method to add the value of a BrobIntk passed as argument to this BrobInt using int array
-  *  @param  gint         BrobInt to add to this
-  *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
-  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-  public BrobInt addInt( BrobInt gint ) {
-    throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
-  }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   *  Method to subtract the value of a BrobIntk passed as argument to this BrobInt using bytes
@@ -249,15 +241,6 @@ public class BrobInt {
   public BrobInt subtractByte( BrobInt gint ) {
     if (gint.sign == 1) { return this.addByte(new BrobInt(gint.toString().substring(1))); }
     else { return this.addByte(new BrobInt("-" + gint.toString())); }
-  }
-
-  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  *  Method to subtract the value of a BrobIntk passed as argument to this BrobInt using int array
-  *  @param  gint         BrobInt to subtract from this
-  *  @return BrobInt that is the difference of the value of this BrobInt and the one passed in
-  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-  public BrobInt subtractInt( BrobInt gint ) {
-    throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
