@@ -11,16 +11,12 @@ public final class DynamicChangeMaker {
     validateTarget(target);
 
     Tuple[][] table = new Tuple[denominations.length][target + 1];
-
+    Tuple combinations = new Tuple(denominations.length);
+    int rows = denominations.length;
+    int columns = target + 1;
+    Arrays.sort(denominations);
     initColZero(table, denominations.length);
 
-    System.out.println("col zero should all be zero: ");
-    for (int i = 0; i < denominations.length; i++) {
-      System.out.println(table[i][0]);
-    }
-
-    Tuple combinations = new Tuple(denominations.length);
-    Arrays.sort(denominations);
     return new Tuple(0);
   }
 
