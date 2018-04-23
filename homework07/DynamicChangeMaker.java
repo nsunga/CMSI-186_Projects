@@ -11,13 +11,50 @@ public final class DynamicChangeMaker {
     validateTarget(target);
 
     Tuple[][] table = new Tuple[denominations.length][target + 1];
-    Tuple combinations = new Tuple(denominations.length);
     int rows = denominations.length;
     int columns = target + 1;
+    int cost = 0;
+    int previousCost = 0;
     Arrays.sort(denominations);
+    System.out.println("denominations: ");
+    for (int i = 0; i < denominations.length; i++) {
+      System.out.println(denominations[i]);
+    }
     initColZero(table, denominations.length);
 
-    return new Tuple(0);
+    for (int i = 0; i < rows; i++) {
+      for (int j = 1; j < columns; j++) {
+        cost = j;
+        if (denominations[i] > j) {
+          table[i][j] = Tuple.IMPOSSIBLE;
+          if (i != 0) {
+            if (!table[i-1][j].isImpossible()) {
+              table[i][j] = table[i-1][j];
+            }
+          }
+        } else {
+          Tuple combinations = new Tuple(denominations.length);
+          combinations.setElement(i, 1);
+          table[i][j] = combinations;
+
+          if ( (j - denominations[i]) >= 0 ) {
+            previousCost = j - denominations[i];
+            if (!table[i][previousCost].isImpossible()) {
+              table[i][j] = table[i][j].add(table[i][previousCost]);
+            } else { table[i][j] = Tuple.IMPOSSIBLE; }
+          }
+
+          if (i != 0) {
+            if (!table[i-1][j].isImpossible()) {
+              if (table[i-1][j].total() < table[i][j].total()) {
+                table[i][j] = table[i-1][j];
+              }
+            }
+          }
+        }
+      }
+    }
+    return table[rows-1][columns-1];
   }
 
   // initialize col zero to zero tuple
@@ -62,11 +99,12 @@ public final class DynamicChangeMaker {
   }
 
   public static void main(String[] args) {
-    int[] denomination = {3, 2, 1};
-    int target = -1;
+    int[] denomination = { 2, 3, 7, 5, 51, 29, 11 };
+    int target = 13579;
 
     try {
-      DynamicChangeMaker.makeChangeWithDynamicProgramming(denomination, target);
+      Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming(denomination, target);
+      System.out.println(result.toString());
     } catch (IllegalArgumentException e) {
       System.out.println("BAD DATA");
     }
