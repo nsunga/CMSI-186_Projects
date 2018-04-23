@@ -1,0 +1,304 @@
+
+  Hello, world, from the BrobInt program!!
+
+    TESTING CONSTRUCTOR AND CONSTANTS:
+    ==================================
+    Test 001: Making a new BrobInt: 
+      expecting: 144127909719710664015092431502440849849506284148982076191826176553
+        and got: 144127909719710664015092431502440849849506284148982076191826176553
+
+    Test 002: Making a second new BrobInt [same as first]: 
+      expecting: 144127909719710664015092431502440849849506284148982076191826176553
+        and got: 144127909719710664015092431502440849849506284148982076191826176553
+    Test 003: Comparing equality of g1 and g2 with 'equals()': 
+      expecting: true
+        and got: true
+
+    Test 004: Making a third new BrobInt [differs at position 47    |]: 
+           [position indicated by down arrow]                  v   
+      expecting: 144127909719710664015092431502440849849506284108982076191826176553
+        and got: 144127909719710664015092431502440849849506284108982076191826176553
+          g1 is: 144127909719710664015092431502440849849506284148982076191826176553
+    Test 005: Comparing equality of g1 and g3 [detect different digit]: 
+      expecting: false
+        and got: false
+
+    Test 006: Making a fourth new BrobInt [same as g3 but truncated]: 
+      expecting: 14412790971971066401509243150244084984950628410898207
+        and got: 14412790971971066401509243150244084984950628410898207
+    Test 007: Comparing equality of g3 and g4 [detect different length prior to detecting different digit]: 
+      expecting: false
+        and got: false
+
+    Test 008: Making a fifth new BrobInt, checking BrobInt.ZERO: 
+      expecting: 0
+        and got: 0
+
+    Test 009: Making a sixth new BrobInt, checking BrobInt.ONE: 
+      expecting: 1
+        and got: 1
+
+    Test 010: Making a seventh new BrobInt, checking BrobInt.TEN: 
+      expecting: 10
+        and got: 10
+
+
+    TESTING VALUEOF( LONG ) METHOD:
+    ===============================
+
+    Test 011: Creating several long type values to check the 'valueOf()' method: 
+      expecting: 9223372036854775807
+        and got: 9223372036854775807
+      expecting: -9223372036854775808
+        and got: -9223372036854775808
+      expecting: 1234567890
+        and got: 1234567890
+    Test 012: Now testing 'valueOf()' method: 
+      expecting: 9223372036854775807
+        and got: 9223372036854775807
+      expecting: -9223372036854775808
+        and got: -9223372036854775808
+      expecting: 1234567890
+        and got: 1234567890
+
+
+    TESTING ADD() AND ADDINT() METHODS:
+    =======================================
+
+    Test 013: Making an eleventh and twelfth new BrobInt, calling add method: 
+      expecting: 10
+        and got: 10
+      expecting: 20
+        and got: 20
+    Test 014: Adding g11 and g12: 
+      expecting: 30 and got 30
+
+    Test 015: Making a thirteenth new BrobInt, calling add methods: 
+      expecting: 234567
+        and got: 234567
+    Test 016: Adding g11 and g13 [10 + 234567] using bytes: 
+      expecting: 234577 and got 234577
+    Test 017: Adding g11 and g13 [10 + 234567] using ints: 
+      expecting: 234577 and got 234577
+    Test 018: Adding g13 and g11 [234567 + 10] using bytes: 
+      expecting: 234577 and got 234577
+    Test 019: Adding g13 and g11 [234567 + 10] using ints: 
+      expecting: 234577 and got 234577
+
+    Test 020: Making a fourteenth new BrobInt, calling add methods: 
+      expecting: -234567
+        and got: -234567
+
+    Test 021: Making a fifteenth new BrobInt, calling add methods: 
+      expecting: -10
+        and got: -10
+    Test 022: Adding g14 and g15 [-234567 + -10] using bytes: 
+      expecting: -234577 and got -234577
+    Test 023: Adding g14 and g15 [-234567 + -10] using ints: 
+      expecting: -234577 and got -234577
+    Test 024: Adding g15 and g14 [-10 + -234567] using bytes: 
+      expecting: -234577 and got -234577
+    Test 025: Adding g15 and g14 [-10 + -234567] using ints: 
+      expecting: -234577 and got -234577
+
+    Test 026: Making a sixteenth new BrobInt, calling add methods: 
+      expecting: -999999
+        and got: -999999
+    Test 027: Adding g14 and g16 [-234567 + -999999] using bytes: 
+      expecting: -1234566 and got -1234566
+    Test 028: Adding g14 and g16 [-234567 + -999999] using ints: 
+      expecting: -1234566 and got -1234566
+    Test 029: Adding g16 and g14 [-999999 + -234567] using bytes: 
+      expecting: -1234566 and got -1234566
+    Test 030: Adding g16 and g14 [-999999 + -234567] using ints: 
+      expecting: -1234566 and got -1234566
+
+      Test 031: Adding g1 and g4 using bytes: 
+      expecting: 144127909719725076806064402568842359092656528233967026820237074760
+        and got: 144127909719725076806064402568842359092656528233967026820237074760
+
+      Test 032: Adding g4 and g1 using ints: 
+      expecting: 144127909719725076806064402568842359092656528233967026820237074760
+        and got: 144127909719725076806064402568842359092656528233967026820237074760
+
+
+    TESTING COMPARETO() METHOD:
+    ===========================
+
+    Test 033: Checking compareTo() method on g1 and g2: 
+      expecting: 0 and got: 0
+
+    Test 034: Checking compareTo() method on g2 and g1: 
+      expecting: 0 and got: 0
+
+    Test 035: Checking compareTo() method on g1 and g3: 
+      expecting: positive value and got: 1
+
+    Test 036: Checking compareTo() method on g3 and g1: 
+      expecting: negative value and got: -1
+
+    Test 037: Checking compareTo() method on g3 and g4: 
+      expecting: positive value and got: 1
+
+
+    TESTING SUBTRACTBYTE() METHOD:
+    ==============================
+
+      Test 038: Subtracting g13 take away g11 [234567 - 10] using bytes: 
+      expecting: 234557
+        and got: 234557
+
+      Test 039: Subtracting g11 take away g13 [10 - 234567] using bytes: 
+      expecting: -234557
+        and got: -234557
+
+      Test 040: Subtracting g13 take away g15 [234567 - (-10)] using bytes: 
+      expecting: 234577
+        and got: 234577
+
+      Test 041: Subtracting g15 take away g13 [(-10) - 234567] using bytes: 
+      expecting: -234577
+        and got: -234577
+
+      Test 042: Subtracting g14 take away g16 [(-234567) - (-999999)] using bytes: 
+        Exception thrown:  
+
+      Test 043: Subtracting g16 take away g14 [(-999999) - (-234567)] using bytes: 
+      expecting: -765432
+        and got: -765432
+
+      Test 044: Subtracting g1 take away g1 [too long to list] using bytes: 
+      expecting: 000000000000000000000000000000000000000000000000000000000000000000
+        and got: 0
+
+
+    TESTING MULTIPLY() METHOD:
+    ==========================
+
+      Test 045: Multiplying g7 by g12 [10 * 20]: 
+      expecting: 200
+        and got: 10
+
+    Test 046: Making a seventeenth new BrobInt: 
+      expecting: 765
+        and got: 765
+
+    Test 047: Making a eightteenth new BrobInt: 
+      expecting: 23
+        and got: 23
+
+    Test 048: Making a nineteenth new BrobInt: 
+      expecting: 56789
+        and got: 56789
+
+    Test 049: Making a twentieth new BrobInt: 
+      expecting: 37
+        and got: 37
+
+      Test 050: Multiplying g17 by g18 [765 * 23]: 
+      expecting: 17595
+        and got: 10
+
+      Test 051: Multiplying g18 by g20 [23 * 37]: 
+      expecting: 851
+        and got: 10
+
+      Test 052: Multiplying g19 by g20 [56789 * 37]: 
+      expecting: 2101193
+        and got: 10
+
+      Test 053: Multiplying g18 by g17 [23 * 765]: 
+      expecting: 17595
+        and got: 10
+
+      Test 054: Multiplying g17 by g19 [765 * 56789]: 
+      expecting: 43443585
+        and got: 10
+
+      Test 055: Multiplying g20 by g19 [37 * 56789]: 
+      expecting: 2101193
+        and got: 10
+
+
+    TESTING DIVIDE() METHOD:
+    ========================
+
+      Test 056: Dividing g19 by g20 [56789 / 37]: 
+      expecting: 1534
+        and got: 10
+
+      Test 057: Dividing g17 by g20 [765 / 37]: 
+      expecting: 20
+        and got: 10
+
+
+    TESTING REMAINDER() METHOD:
+    ===========================
+
+      Test 058: Modding g17 by g18 [765 % 23]: 
+        Exception thrown:  java.lang.UnsupportedOperationException: 
+         Sorry, that operation is not yet implemented.
+
+      Test 059: Modding g19 by g20 [56789 % 37]: 
+        Exception thrown:  java.lang.UnsupportedOperationException: 
+         Sorry, that operation is not yet implemented.
+
+
+   Welcome to the Fibonacci sequence number finder!
+
+
+
+   Starting from zero, the 23rd Fibonacci number is: 
+46368
+
+
+
+  ...HA!! Like I'm going to do the ENTIRE thing for you.....  *grins*
+
+
+   Welcome to the Fibonacci sequence number finder!
+
+
+
+   Starting from zero, the 100th Fibonacci number is: 
+573147844013817084101
+
+
+
+  ...HA!! Like I'm going to do the ENTIRE thing for you.....  *grins*
+
+
+   Welcome to the Fibonacci sequence number finder!
+
+
+
+   Starting from zero, the 250th Fibonacci number is: 
+12776523572924732586037033894655031898659556447352249
+
+
+
+  ...HA!! Like I'm going to do the ENTIRE thing for you.....  *grins*
+
+
+   Welcome to the Fibonacci sequence number finder!
+
+
+
+   Starting from zero, the 1000th Fibonacci number is: 
+70330367711422815821835254877183549770181269836358732742604905087154537118196933579742249494562611733487750449241765991088186363265450223647106012053374121273867339111198139373125598767690091902245245323403501
+
+
+
+  ...HA!! Like I'm going to do the ENTIRE thing for you.....  *grins*
+
+
+   Welcome to the Fibonacci sequence number finder!
+
+
+
+   Starting from zero, the 10000th Fibonacci number is: 
+54438373113565281338734260993750380135389184554695967026247715841208582865622349017083051547938960541173822675978026317384359584751116241439174702642959169925586334117906063048089793531476108466259072759367899150677960088306597966641965824937721800381441158841042480997984696487375337180028163763317781927941101369262750979509800713596718023814710669912644214775254478587674568963808002962265133111359929762726679441400101575800043510777465935805362502461707918059226414679005690752321895868142367849593880756423483754386342639635970733756260098962462668746112041739819404875062443709868654315626847186195620146126642232711815040367018825205314845875817193533529827837800351902529239517836689467661917953884712441028463935449484614450778762529520961887597272889220768537396475869543159172434537193611263743926337313005896167248051737986306368115003088396749587102619524631352447499505204198305187168321623283859794627245919771454628218399695789223798912199431775469705216131081096559950638297261253848242007897109054754028438149611930465061866170122983288964352733750792786069444761853525144421077928045979904561298129423809156055033032338919609162236698759922782923191896688017718575555520994653320128446502371153715141749290913104897203455577507196645425232862022019506091483585223882711016708433051169942115775151255510251655931888164048344129557038825477521111577395780115868397072602565614824956460538700280331311861485399805397031555727529693399586079850381581446276433858828529535803424850845426446471681531001533180479567436396815653326152509571127480411928196022148849148284389124178520174507305538928717857923509417743383331506898239354421988805429332440371194867215543576548565499134519271098919802665184564927827827212957649240235507595558205647569365394873317659000206373126570643509709482649710038733517477713403319028105575667931789470024118803094604034362953471997461392274791549730356412633074230824051999996101549784667340458326852960388301120765629245998136251652347093963049734046445106365304163630823669242257761468288461791843224793434406079917883360676846711185597501
+
+
+
+  ...HA!! Like I'm going to do the ENTIRE thing for you.....  *grins*
