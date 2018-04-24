@@ -1,6 +1,8 @@
 import java.util.Arrays;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
 
 public final class DynamicChangeMaker {
   private DynamicChangeMaker() { }
@@ -9,13 +11,15 @@ public final class DynamicChangeMaker {
   public static Tuple makeChangeWithDynamicProgramming(int[] denominations, int target) {
     validateDenominations(denominations);
     validateTarget(target);
-
+    Map<Integer, Integer> coin_to_index = mapping(denominations);
     Tuple[][] table = new Tuple[denominations.length][target + 1];
     int rows = denominations.length;
     int columns = target + 1;
     int cost = 0;
     int previousCost = 0;
+
     Arrays.sort(denominations);
+    
     System.out.println("denominations: ");
     for (int i = 0; i < denominations.length; i++) {
       System.out.println(denominations[i]);
@@ -98,6 +102,9 @@ public final class DynamicChangeMaker {
     return false;
   }
 
+  private static HashMap<Integer, Integer> mapping(int[] denominations) {
+    return new HashMap<Integer, Integer>();
+  }
   public static void main(String[] args) {
     int[] denomination = { 2, 3, 7, 5, 51, 29, 11 };
     int target = 13579;
