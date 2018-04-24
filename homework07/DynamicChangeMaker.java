@@ -19,7 +19,7 @@ public final class DynamicChangeMaker {
     int previousCost = 0;
 
     Arrays.sort(denominations);
-    
+
     System.out.println("denominations: ");
     for (int i = 0; i < denominations.length; i++) {
       System.out.println(denominations[i]);
@@ -103,7 +103,15 @@ public final class DynamicChangeMaker {
   }
 
   private static HashMap<Integer, Integer> mapping(int[] denominations) {
-    return new HashMap<Integer, Integer>();
+    HashMap<Integer, Integer> coin_to_index = new HashMap<Integer, Integer>();
+
+    for (int i = 0; i < denominations.length; i++) {
+        if (!coin_to_index.containsKey(new Integer(denominations[i]))) {
+          coin_to_index.put(new Integer(denominations[i]), new Integer(i));
+        }
+    }
+
+    return coin_to_index;
   }
   public static void main(String[] args) {
     int[] denomination = { 2, 3, 7, 5, 51, 29, 11 };
