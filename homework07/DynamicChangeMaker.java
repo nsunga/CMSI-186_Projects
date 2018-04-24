@@ -11,7 +11,7 @@ public final class DynamicChangeMaker {
   public static Tuple makeChangeWithDynamicProgramming(int[] denominations, int target) {
     validateDenominations(denominations);
     validateTarget(target);
-    Map<Integer, Integer> coin_to_index = mapping(denominations);
+    Map<Integer, Integer> coinToIndex = mapping(denominations);
     Tuple[][] table = new Tuple[denominations.length][target + 1];
     int rows = denominations.length;
     int columns = target + 1;
@@ -19,11 +19,12 @@ public final class DynamicChangeMaker {
     int previousCost = 0;
 
     Arrays.sort(denominations);
+    Map<Integer, Integer> indexToCoinSorted = mappingIndex(denominations);
 
-    System.out.println("denominations: ");
-    for (int i = 0; i < denominations.length; i++) {
-      System.out.println(denominations[i]);
-    }
+    // System.out.println("denominations: ");
+    // for (int i = 0; i < denominations.length; i++) {
+    //   System.out.println(denominations[i]);
+    // }
     initColZero(table, denominations.length);
 
     for (int i = 0; i < rows; i++) {
@@ -103,15 +104,33 @@ public final class DynamicChangeMaker {
   }
 
   private static HashMap<Integer, Integer> mapping(int[] denominations) {
-    HashMap<Integer, Integer> coin_to_index = new HashMap<Integer, Integer>();
+    HashMap<Integer, Integer> coinToIndex = new HashMap<Integer, Integer>();
 
     for (int i = 0; i < denominations.length; i++) {
-        if (!coin_to_index.containsKey(new Integer(denominations[i]))) {
-          coin_to_index.put(new Integer(denominations[i]), new Integer(i));
+        if (!coinToIndex.containsKey(new Integer(denominations[i]))) {
+          coinToIndex.put(new Integer(denominations[i]), new Integer(i));
         }
     }
 
-    return coin_to_index;
+    System.out.println("MAP FUNCTION");
+    coinToIndex.forEach((k,v)-> System.out.println(k+", "+v));
+
+    return coinToIndex;
+  }
+
+  private static HashMap<Integer, Integer> mappingIndex(int[] denominations) {
+    HashMap<Integer, Integer> indexToCoin = new HashMap<Integer, Integer>();
+
+    for (int i = 0; i < denominations.length; i++) {
+      if (!indexToCoin.containsKey(new Integer(i))) {
+        indexToCoin.put(new Integer(i), new Integer(denominations[i]));
+      }
+    }
+
+    System.out.println("\n\nSORTED INDEX TO COIN MAP FUNCTION");
+    indexToCoin.forEach((k,v)-> System.out.println(k+", "+v));
+
+    return indexToCoin;
   }
   public static void main(String[] args) {
     int[] denomination = { 2, 3, 7, 5, 51, 29, 11 };
