@@ -15,21 +15,15 @@ public final class DynamicChangeMaker {
     Tuple[][] table = new Tuple[denominations.length][target + 1];
     int rows = denominations.length;
     int columns = target + 1;
-    int cost = 0;
     int previousCost = 0;
 
     Arrays.sort(denominations);
     Map<Integer, Integer> indexToCoinSorted = mappingIndex(denominations);
 
-    // System.out.println("denominations: ");
-    // for (int i = 0; i < denominations.length; i++) {
-    //   System.out.println(denominations[i]);
-    // }
     initColZero(table, denominations.length);
 
     for (int i = 0; i < rows; i++) {
       for (int j = 1; j < columns; j++) {
-        cost = j;
         if (denominations[i] > j) {
           table[i][j] = Tuple.IMPOSSIBLE;
           if (i != 0) {
@@ -38,15 +32,14 @@ public final class DynamicChangeMaker {
             }
           }
         } else {
-          Tuple combinations = new Tuple(denominations.length);
-          combinations.setElement(i, 1);
-          table[i][j] = combinations;
+          table[i][j] = new Tuple(denominations.length);
+          table[i][j].setElement(i, 1);
 
-          if ( (j - denominations[i]) >= 0 ) {
-            previousCost = j - denominations[i];
-            if (!table[i][previousCost].isImpossible()) {
-              table[i][j] = table[i][j].add(table[i][previousCost]);
-            } else { table[i][j] = Tuple.IMPOSSIBLE; }
+          previousCost = j - denominations[i];
+          if (table[i][previousCost].isImpossible()) {
+            table[i][j] = Tuple.IMPOSSIBLE;
+          } else {
+            table[i][j] = table[i][j].add(table[i][previousCost]);
           }
 
           if (i != 0) {
@@ -54,12 +47,17 @@ public final class DynamicChangeMaker {
               if (table[i-1][j].total() < table[i][j].total()) {
                 table[i][j] = table[i-1][j];
               }
-            }
+            } //else { table[i][j] = Tuple.IMPOSSIBLE; }
           }
         }
       }
     }
-    return table[rows-1][columns-1];
+
+    Tuple result = table[rows-1][columns-1];
+    if (result.isImpossible()) { return result; }
+    result = tupleSorter(coinToIndex, indexToCoinSorted, result);
+
+    return result;
   }
 
   // initialize col zero to zero tuple
@@ -112,9 +110,6 @@ public final class DynamicChangeMaker {
         }
     }
 
-    System.out.println("MAP FUNCTION");
-    coinToIndex.forEach((k,v)-> System.out.println(k+", "+v));
-
     return coinToIndex;
   }
 
@@ -127,15 +122,23 @@ public final class DynamicChangeMaker {
       }
     }
 
-    System.out.println("\n\nSORTED INDEX TO COIN MAP FUNCTION");
-    indexToCoin.forEach((k,v)-> System.out.println(k+", "+v));
-
     return indexToCoin;
   }
-  public static void main(String[] args) {
-    int[] denomination = { 2, 3, 7, 5, 51, 29, 11 };
-    int target = 13579;
 
+  private static Tuple tupleSorter(Map<Integer, Integer> coinToIndex, Map<Integer, Integer> indexToCoinSorted, Tuple result) {
+    Tuple sortedResult = new Tuple(result.length());
+    for (int i = 0; i < result.length(); i++) {
+      if (result.getElement(i) != 0) {
+        Integer correctIndex = coinToIndex.get(indexToCoinSorted.get(i));
+        sortedResult.setElement(correctIndex, result.getElement(i));
+      }
+    }
+    return sortedResult;
+  }
+  public static void main(String[] args) {
+    int[] denomination = { 17, 23, 121, 47, 3 };
+    int target = 13579;
+    // answer <3,0,111,2,1>
     try {
       Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming(denomination, target);
       System.out.println(result.toString());
