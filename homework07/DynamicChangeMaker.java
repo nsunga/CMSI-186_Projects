@@ -11,30 +11,31 @@ public final class DynamicChangeMaker {
   public static Tuple makeChangeWithDynamicProgramming(int[] denominations, int target) {
     if (!validateDenominations(denominations)) { return Tuple.IMPOSSIBLE; }
     if (!validateTarget(target)) { return Tuple.IMPOSSIBLE; }
+
     Map<Integer, Integer> coinToIndex = mapping(denominations);
-    Tuple[][] table = new Tuple[denominations.length][target + 1];
-    int rows = denominations.length;
-    int columns = target + 1;
-    int previousCost = 0;
 
     Arrays.sort(denominations);
-    Map<Integer, Integer> indexToCoinSorted = mappingIndex(denominations);
 
-    initColZero(table, denominations.length);
+    Map<Integer, Integer> indexToCoinSorted = mappingIndex(denominations);
+    int rows = denominations.length;
+    int columns = target + 1;
+    Tuple[][] table = new Tuple[rows][columns];
+    int previousCost = 0;
+
+    initColZero(table, denominations);
 
     for (int i = 0; i < rows; i++) {
       for (int j = 1; j < columns; j++) {
         if (denominations[i] > j) {
           table[i][j] = Tuple.IMPOSSIBLE;
-          if (i != 0) {
-            if (!table[i-1][j].isImpossible()) {
-              table[i][j] = table[i-1][j];
-            }
-          }
+          // if (i != 0) {
+          //   if (!table[i-1][j].isImpossible()) {
+          //     table[i][j] = table[i-1][j];
+          //   }
+          // }
         } else {
           table[i][j] = new Tuple(denominations.length);
           table[i][j].setElement(i, 1);
-
           previousCost = j - denominations[i];
           if (table[i][previousCost].isImpossible()) {
             table[i][j] = Tuple.IMPOSSIBLE;
@@ -42,12 +43,25 @@ public final class DynamicChangeMaker {
             table[i][j] = table[i][j].add(table[i][previousCost]);
           }
 
-          if (i != 0) {
-            if (!table[i-1][j].isImpossible()) {
-              if (table[i-1][j].total() < table[i][j].total()) {
-                table[i][j] = table[i-1][j];
-              }
-            } //else { table[i][j] = Tuple.IMPOSSIBLE; }
+          // if (i != 0) {
+          //   if (!table[i-1][j].isImpossible()) {
+          //     if (table[i-1][j].total() < table[i][j].total()) {
+          //       table[i][j] = table[i-1][j];
+          //     }
+          //   } //else { table[i][j] = Tuple.IMPOSSIBLE; }
+          // }
+        }
+
+        // if (i != 0) {
+        //   table[i][j] = checkForOptimal(table[i][j], table[i-1][j]);
+        // }
+        if (i != 0) {
+          if (!table[i-1][j].isImpossible() && table[i][j].isImpossible()) {
+            table[i][j] = table[i-1][j];
+          } else if (!table[i-1][j].isImpossible()) {
+            if (table[i-1][j].total() < table[i][j].total()) {
+              table[i][j] = table[i-1][j];
+            }
           }
         }
       }
@@ -60,10 +74,17 @@ public final class DynamicChangeMaker {
     return result;
   }
 
+  private static Tuple checkForOptimal(Tuple current, Tuple above) {
+    if (above.isImpossible() && !current.isImpossible()) { return current; }
+    else if (!above.isImpossible() && current.isImpossible()) { return above; }
+    else if (above.isImpossible() && current.isImpossible()) { return Tuple.IMPOSSIBLE; }
+    else if (current.total() < above.total()) { return current; }
+    else { return above; }
+  }
   // initialize col zero to zero tuple
-  private static void initColZero(Tuple[][] table, int coins) {
-    for (int i = 0; i < coins; i++) {
-      table[i][0] = new Tuple(coins);
+  private static void initColZero(Tuple[][] table, int[] coins) {
+    for (int i = 0; i < coins.length; i++) {
+      table[i][0] = new Tuple(coins.length);
     }
   }
 
