@@ -27,8 +27,11 @@
  *                                    as well as a couple of extra tests for bogus denomination values to
  *                                    check throwing exceptions and to verify that *something* returns an
  *                                    "Impossible tuple" result.  Ready to commit the final version.
+ *  1.3.0  2018-04-25  B.J. Johnson  Added a few more test cases, checking for invalid inputs and for
+ *                                    a couple more "odd" demonimations.  Corrected incorrect spellings
  *
  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Arrays;
@@ -62,9 +65,11 @@ public class DynamicChangemakerTestHarness {
 
       System.out.println( "creating random tuple: " + randomTuple( 7, true ) );
       System.out.println( "creating random tuple: " + randomTuple( 7, false ) );
-      test_BogusDenomintaions1();
-      test_BogusDenomintaions2();
-      test_BogusDenomintaions3();
+      test_BogusDenominations1();
+      test_BogusDenominations2();
+      test_BogusDenominations3();
+      // test_BogusDenomintaions4();   this was removed permanently
+      test_BogusDenominations5();
 
       System.out.println( "\n\nResults:\n      " + successes + "/" + attempts + " tests passed." );
    }
@@ -217,6 +222,30 @@ public class DynamicChangemakerTestHarness {
          e.printStackTrace();
          displayFailure();
       }
+
+      newDenominations  = new int[] { 11, 13, 17, 19, 23  };
+      System.out.println( "\n    Test" + makeTwoDigits() + ": testing for optimalsolution for 1357911 cents using " + Arrays.toString( newDenominations ) + ": " );
+      System.out.println( "      This will take a second or two - please be patient......" );
+      result = DynamicChangeMaker.makeChangeWithDynamicProgramming( newDenominations, 1357911 );
+      try {
+         System.out.print( "      expecting Tuple: <1,2,0,0,59038>: " );
+         displaySuccessIfTrue( "<1,2,0,0,59038>".equals( result.toString() ) );
+      } catch (Exception e) {
+         e.printStackTrace();
+         displayFailure();
+      }
+
+      newDenominations  = new int[] { 23, 19, 17, 13, 11  };
+      System.out.println( "\n    Test" + makeTwoDigits() + ": testing for optimalsolution for 1357911 cents using " + Arrays.toString( newDenominations ) + ": " );
+      System.out.println( "      This will take a second or two - please be patient......" );
+      result = DynamicChangeMaker.makeChangeWithDynamicProgramming( newDenominations, 1357911 );
+      try {
+         System.out.print( "      expecting Tuple: <59037,2,0,0,2>: " );
+         displaySuccessIfTrue( "<59037,2,0,0,2>".equals( result.toString() ) );
+      } catch (Exception e) {
+         e.printStackTrace();
+         displayFailure();
+      }
    }
 
    public static void test_Euros() {
@@ -309,8 +338,14 @@ public class DynamicChangemakerTestHarness {
 
    }
 
-
-
+  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   *  Method to display an Array representation of this BrobInt as its bytes
+   *  @param   d  int array from which to display the contents
+   *  NOTE: may be changed to int[] or some other type based on requirements in code above
+   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+   public static void toArray( int[] d ) {
+      System.out.println( "Array contents: " + Arrays.toString( d ) );
+   }
 
   /**
    *  silly little method to add zeros to the front of a number string
@@ -351,16 +386,18 @@ public class DynamicChangemakerTestHarness {
   /**
    * method to test a bogus set of denominations which includes a negative amount
    */
-   public static void test_BogusDenomintaions1() {
-      System.out.println( "\n\n  TESTING OF RANDOM TUPLE GENERATION FOR THREE BOGUS DENOMINATION SETS" );
-      System.out.println( "  ====================================================================" );
+   public static void test_BogusDenominations1() {
+      System.out.println( "\n\n  TESTING OF TUPLE GENERATION FOR THREE BOGUS DENOMINATION SETS" );
+      System.out.println( "  =============================================================" );
 
       int[] badDenominations = new int[] { 1, 2, 3, 4, -5, 6, 7 };
-      System.out.println( "\n    Test " + makeTwoDigits() + ": testing first list of bogus denomintaions, containing a negative......" );
-      System.out.println( "          expecting: success: " );
+      System.out.println( "\n    Test " + makeTwoDigits() + ": testing first list of bogus denominations, containing a negative......" );
+      System.out.println( "          expecting: BAD DATA and a message: " );
       System.out.print  ( "            and got: " );
       try {
          Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, 2345 );
+         System.out.print( "           which is: " );
+         displaySuccessIfTrue( result.toString().contains( "Impossible" ) ) ;
       }
       catch( Exception e ) {
          displaySuccessIfTrue( false );
@@ -372,13 +409,15 @@ public class DynamicChangemakerTestHarness {
   /**
    * method to test a bogus set of denominations which includes a zero
    */
-   public static void test_BogusDenomintaions2() {
+   public static void test_BogusDenominations2() {
       int[] badDenominations = new int[] { 2, 3, 5, 8, 13, 21, 0, 34 };
-      System.out.println( "\n    Test " + makeTwoDigits() + ": testing second list of bogus denomintaions, containing a zero......" );
-      System.out.println( "          expecting: success: " );
+      System.out.println( "\n    Test " + makeTwoDigits() + ": testing second list of bogus denominations, containing a zero......" );
+      System.out.println( "          expecting: BAD DATA and a message: " );
       System.out.print  ( "            and got: " );
       try {
          Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, 2345 );
+         System.out.print( "           which is: " );
+         displaySuccessIfTrue( result.toString().contains( "Impossible" ) ) ;
       }
       catch( Exception e ) {
          displaySuccessIfTrue( false );
@@ -390,13 +429,35 @@ public class DynamicChangemakerTestHarness {
   /**
    * method to test a bogus set of denominations which includes repeats
    */
-   public static void test_BogusDenomintaions3() {
+   public static void test_BogusDenominations3() {
       int[] badDenominations = new int[] { 2, 3, 2, 3 };
-      System.out.println( "\n    Test " + makeTwoDigits() + ": testing third list of bogus denomintaions, containing repeats......" );
-      System.out.println( "          expecting: success: " );
+      System.out.println( "\n    Test " + makeTwoDigits() + ": testing third list of bogus denominations, containing repeats......" );
+      System.out.println( "          expecting: BAD DATA and a message: " );
       System.out.print  ( "            and got: " );
       try {
          Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, 2345 );
+         System.out.print( "           which is: " );
+         displaySuccessIfTrue( result.toString().contains( "Impossible" ) ) ;
+      }
+      catch( Exception e ) {
+         displaySuccessIfTrue( false );
+         e.printStackTrace();
+         displayFailure();
+      }
+   }
+
+  /**
+   * method to test a bogus set of denominations which includes repeats
+   */
+   public static void test_BogusDenominations5() {
+      int[] badDenominations = new int[] { 2, 3, 17, 23 };
+      System.out.println( "\n    Test " + makeTwoDigits() + ": testing bogus negative amount......" );
+      System.out.println( "          expecting: BAD DATA and a message: " );
+      System.out.print  ( "            and got: " );
+      try {
+         Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, -2345 );
+         System.out.print( "           which is: " );
+         displaySuccessIfTrue( result.toString().contains( "Impossible" ) ) ;
       }
       catch( Exception e ) {
          displaySuccessIfTrue( false );

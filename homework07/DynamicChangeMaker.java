@@ -9,8 +9,8 @@ public final class DynamicChangeMaker {
 
   // main ting
   public static Tuple makeChangeWithDynamicProgramming(int[] denominations, int target) {
-    validateDenominations(denominations);
-    validateTarget(target);
+    if (!validateDenominations(denominations)) { return Tuple.IMPOSSIBLE; }
+    if (!validateTarget(target)) { return Tuple.IMPOSSIBLE; }
     Map<Integer, Integer> coinToIndex = mapping(denominations);
     Tuple[][] table = new Tuple[denominations.length][target + 1];
     int rows = denominations.length;
@@ -68,15 +68,17 @@ public final class DynamicChangeMaker {
   }
 
   // validate denominations
-  private static void validateDenominations(int[] denominations) {
+  private static boolean validateDenominations(int[] denominations) {
     boolean existingNegatives = checkForNegatives(denominations);
     boolean existingDuplicates = checkForDuplicates(denominations);
-    if (existingDuplicates || existingNegatives) { throw new IllegalArgumentException(); }
+    if (existingDuplicates || existingNegatives) { return false; }
+    return true;
   }
 
   // validate target
-  private static void validateTarget(int target) {
-    if (target < 0) { throw new IllegalArgumentException(); }
+  private static boolean validateTarget(int target) {
+    if (target < 0) { return false; }
+    return true;
   }
 
   // checks for neg denominations
