@@ -12,11 +12,11 @@ public final class DynamicChangeMaker {
     if (!validateDenominations(denominations)) { return Tuple.IMPOSSIBLE; }
     if (!validateTarget(target)) { return Tuple.IMPOSSIBLE; }
 
-    Map<Integer, Integer> coinToIndex = mapping(denominations);
+    // Map<Integer, Integer> coinToIndex = mapping(denominations);
 
-    Arrays.sort(denominations);
+    // Arrays.sort(denominations);
 
-    Map<Integer, Integer> indexToCoinSorted = mappingIndex(denominations);
+    // Map<Integer, Integer> indexToCoinSorted = mappingIndex(denominations);
     int rows = denominations.length;
     int columns = target + 1;
     Tuple[][] table = new Tuple[rows][columns];
@@ -69,7 +69,7 @@ public final class DynamicChangeMaker {
 
     Tuple result = table[rows-1][columns-1];
     if (result.isImpossible()) { return result; }
-    result = tupleSorter(coinToIndex, indexToCoinSorted, result);
+    // result = tupleSorter(coinToIndex, indexToCoinSorted, result);
 
     return result;
   }
