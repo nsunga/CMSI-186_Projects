@@ -1,16 +1,14 @@
 import java.util.Arrays;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.HashMap;
 
 public final class DynamicChangeMaker {
   private DynamicChangeMaker() { }
 
   // main ting
   public static Tuple makeChangeWithDynamicProgramming(int[] denominations, int target) {
-    if (!validateDenominations(denominations)) { return Tuple.IMPOSSIBLE; }
-    if (!validateTarget(target)) { return Tuple.IMPOSSIBLE; }
+    if (!validDenominations(denominations)) { return Tuple.IMPOSSIBLE; }
+    if (!validTarget(target)) { return Tuple.IMPOSSIBLE; }
 
     int rows = denominations.length;
     int columns = target + 1;
@@ -21,28 +19,19 @@ public final class DynamicChangeMaker {
 
     for (int i = 0; i < rows; i++) {
       for (int j = 1; j < columns; j++) {
+
         if (denominations[i] > j) {
           table[i][j] = Tuple.IMPOSSIBLE;
         } else {
           table[i][j] = new Tuple(denominations.length);
           table[i][j].setElement(i, 1);
           previousCost = j - denominations[i];
-          if (table[i][previousCost].isImpossible()) {
-            table[i][j] = Tuple.IMPOSSIBLE;
-          } else {
-            table[i][j] = table[i][j].add(table[i][previousCost]);
-          }
+          table[i][j] = table[i][previousCost].isImpossible() ?
+            Tuple.IMPOSSIBLE :
+            table[i][j].add(table[i][previousCost]);
         }
 
-        if (i != 0) {
-          if (!table[i-1][j].isImpossible() && table[i][j].isImpossible()) {
-            table[i][j] = table[i-1][j];
-          } else if (!table[i-1][j].isImpossible()) {
-            if (table[i-1][j].total() < table[i][j].total()) {
-              table[i][j] = table[i-1][j];
-            }
-          }
-        }
+        if (i != 0) { table[i][j] = optimize(table[i][j], table[i-1][j]); }
       }
     }
 
@@ -50,13 +39,15 @@ public final class DynamicChangeMaker {
     return result;
   }
 
-  private static Tuple checkForOptimal(Tuple current, Tuple above) {
-    if (above.isImpossible() && !current.isImpossible()) { return current; }
-    else if (!above.isImpossible() && current.isImpossible()) { return above; }
-    else if (above.isImpossible() && current.isImpossible()) { return Tuple.IMPOSSIBLE; }
-    else if (current.total() < above.total()) { return current; }
-    else { return above; }
+  private static Tuple optimize(Tuple current, Tuple above) {
+    if (!above.isImpossible()) {
+      if (current.isImpossible()) { return above; }
+      if (above.total() < current.total()) { return above; }
+    }
+
+    return current;
   }
+
   // initialize col zero to zero tuple
   private static void initColZero(Tuple[][] table, int[] coins) {
     for (int i = 0; i < coins.length; i++) {
@@ -65,17 +56,15 @@ public final class DynamicChangeMaker {
   }
 
   // validate denominations
-  private static boolean validateDenominations(int[] denominations) {
+  private static boolean validDenominations(int[] denominations) {
     boolean existingNegatives = checkForNegatives(denominations);
     boolean existingDuplicates = checkForDuplicates(denominations);
-    if (existingDuplicates || existingNegatives) { return false; }
-    return true;
+    return !(existingDuplicates || existingNegatives);
   }
 
   // validate target
-  private static boolean validateTarget(int target) {
-    if (target < 0) { return false; }
-    return true;
+  private static boolean validTarget(int target) {
+    return target > 0;
   }
 
   // checks for neg denominations
@@ -99,11 +88,10 @@ public final class DynamicChangeMaker {
 
     return false;
   }
-  
+
   public static void main(String[] args) {
     int[] denomination = { 17, 23, 121, 47, 3 };
     int target = 13579;
-    // answer <3,0,111,2,1>
     try {
       Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming(denomination, target);
       System.out.println(result.toString());
