@@ -1,11 +1,36 @@
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * File name  :  DynamicChangeMaker.java
+ * Purpose    :  Implementation of minimum ChangeMaker. Uses Tuple.java and tested in
+ *                DynamicChangemakerTestHarness.java
+ * @author    :  Nick Sunga
+ * Date       :  2017-04-19
+ * Description:  Given a set of denominations, find the minimum number
+ *                of coins to make a given amount. D Y N A M I C programming
+ * Notes      :  None
+ * Warnings   :  None
+ *
+ *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.HashSet;
 
+/**
+* This class is DynamicChangeMaker. Set to final because instantiating one is semantically weird.
+*/
 public final class DynamicChangeMaker {
+  /**
+  * Private constructor
+  */
   private DynamicChangeMaker() { }
 
-  // main ting
+  /**
+  * Returns a Tuple representing the minimum number of coins to make a given amount
+  *
+  * @param denominations  int[] of the denominations
+  * @param target  the given amount
+  * @return the tuple of minimum number of coins
+  */
   public static Tuple makeChangeWithDynamicProgramming(int[] denominations, int target) {
     if (!validDenominations(denominations)) { return Tuple.IMPOSSIBLE; }
     if (!validTarget(target)) { return Tuple.IMPOSSIBLE; }
@@ -39,6 +64,13 @@ public final class DynamicChangeMaker {
     return result;
   }
 
+  /**
+  * Returns the minimum of the two tuples
+  *
+  * @param current  the current table cell to be filled
+  * @param above    the above table cell that already has an answer
+  * @return the minimum of the two tuples
+  */
   private static Tuple optimize(Tuple current, Tuple above) {
     if (!above.isImpossible()) {
       if (current.isImpossible()) { return above; }
@@ -48,26 +80,46 @@ public final class DynamicChangeMaker {
     return current;
   }
 
-  // initialize col zero to zero tuple
+  /**
+  * Initializes column zero to zero Tuples of length coins
+  *
+  * @param table  table of tuples
+  * @param coins  the given coins
+  */
   private static void initColZero(Tuple[][] table, int[] coins) {
     for (int i = 0; i < coins.length; i++) {
       table[i][0] = new Tuple(coins.length);
     }
   }
 
-  // validate denominations
+  /**
+  * Checks if given denominations are valid. Cannot have negatives or duplicates.
+  *
+  * @param denominations  int[] of the denominations
+  * @return false if not valid. true if valid
+  */
   private static boolean validDenominations(int[] denominations) {
     boolean existingNegatives = checkForNegatives(denominations);
     boolean existingDuplicates = checkForDuplicates(denominations);
     return !(existingDuplicates || existingNegatives);
   }
 
-  // validate target
+  /**
+  * Checks if target is valid.
+  *
+  * @param target  the given amount
+  * @return true if positive
+  */
   private static boolean validTarget(int target) {
     return target > 0;
   }
 
-  // checks for neg denominations
+  /**
+  * Checks if denominations are negative
+  *
+  * @param denominations  int[] of the denominations
+  * @return false if a denomination is negative
+  */
   private static boolean checkForNegatives(int[] denominations) {
     for (int i = 0; i < denominations.length; i++) {
       if (denominations[i] <= 0) { return true; }
@@ -76,7 +128,12 @@ public final class DynamicChangeMaker {
     return false;
   }
 
-  // checks for duplicate denominations
+  /**
+  * Checks for duplicate denominations
+  *
+  * @param denominations  int[] of the denominations
+  * @return true if there exists a duplicate denomination
+  */
   private static boolean checkForDuplicates(int[] denominations) {
     Set<Integer> coins = new HashSet<Integer>();
 
