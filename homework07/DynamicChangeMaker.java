@@ -88,15 +88,4 @@ public final class DynamicChangeMaker {
 
     return false;
   }
-
-  public static void main(String[] args) {
-    int[] denomination = { 17, 23, 121, 47, 3 };
-    int target = 13579;
-    try {
-      Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming(denomination, target);
-      System.out.println(result.toString());
-    } catch (IllegalArgumentException e) {
-      System.out.println("BAD DATA");
-    }
-  }
 }
