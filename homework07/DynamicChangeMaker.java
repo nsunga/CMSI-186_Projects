@@ -12,11 +12,6 @@ public final class DynamicChangeMaker {
     if (!validateDenominations(denominations)) { return Tuple.IMPOSSIBLE; }
     if (!validateTarget(target)) { return Tuple.IMPOSSIBLE; }
 
-    // Map<Integer, Integer> coinToIndex = mapping(denominations);
-
-    // Arrays.sort(denominations);
-
-    // Map<Integer, Integer> indexToCoinSorted = mappingIndex(denominations);
     int rows = denominations.length;
     int columns = target + 1;
     Tuple[][] table = new Tuple[rows][columns];
@@ -28,11 +23,6 @@ public final class DynamicChangeMaker {
       for (int j = 1; j < columns; j++) {
         if (denominations[i] > j) {
           table[i][j] = Tuple.IMPOSSIBLE;
-          // if (i != 0) {
-          //   if (!table[i-1][j].isImpossible()) {
-          //     table[i][j] = table[i-1][j];
-          //   }
-          // }
         } else {
           table[i][j] = new Tuple(denominations.length);
           table[i][j].setElement(i, 1);
@@ -42,19 +32,8 @@ public final class DynamicChangeMaker {
           } else {
             table[i][j] = table[i][j].add(table[i][previousCost]);
           }
-
-          // if (i != 0) {
-          //   if (!table[i-1][j].isImpossible()) {
-          //     if (table[i-1][j].total() < table[i][j].total()) {
-          //       table[i][j] = table[i-1][j];
-          //     }
-          //   } //else { table[i][j] = Tuple.IMPOSSIBLE; }
-          // }
         }
 
-        // if (i != 0) {
-        //   table[i][j] = checkForOptimal(table[i][j], table[i-1][j]);
-        // }
         if (i != 0) {
           if (!table[i-1][j].isImpossible() && table[i][j].isImpossible()) {
             table[i][j] = table[i-1][j];
@@ -68,9 +47,6 @@ public final class DynamicChangeMaker {
     }
 
     Tuple result = table[rows-1][columns-1];
-    if (result.isImpossible()) { return result; }
-    // result = tupleSorter(coinToIndex, indexToCoinSorted, result);
-
     return result;
   }
 
@@ -123,41 +99,7 @@ public final class DynamicChangeMaker {
 
     return false;
   }
-
-  private static HashMap<Integer, Integer> mapping(int[] denominations) {
-    HashMap<Integer, Integer> coinToIndex = new HashMap<Integer, Integer>();
-
-    for (int i = 0; i < denominations.length; i++) {
-        if (!coinToIndex.containsKey(new Integer(denominations[i]))) {
-          coinToIndex.put(new Integer(denominations[i]), new Integer(i));
-        }
-    }
-
-    return coinToIndex;
-  }
-
-  private static HashMap<Integer, Integer> mappingIndex(int[] denominations) {
-    HashMap<Integer, Integer> indexToCoin = new HashMap<Integer, Integer>();
-
-    for (int i = 0; i < denominations.length; i++) {
-      if (!indexToCoin.containsKey(new Integer(i))) {
-        indexToCoin.put(new Integer(i), new Integer(denominations[i]));
-      }
-    }
-
-    return indexToCoin;
-  }
-
-  private static Tuple tupleSorter(Map<Integer, Integer> coinToIndex, Map<Integer, Integer> indexToCoinSorted, Tuple result) {
-    Tuple sortedResult = new Tuple(result.length());
-    for (int i = 0; i < result.length(); i++) {
-      if (result.getElement(i) != 0) {
-        Integer correctIndex = coinToIndex.get(indexToCoinSorted.get(i));
-        sortedResult.setElement(correctIndex, result.getElement(i));
-      }
-    }
-    return sortedResult;
-  }
+  
   public static void main(String[] args) {
     int[] denomination = { 17, 23, 121, 47, 3 };
     int target = 13579;
